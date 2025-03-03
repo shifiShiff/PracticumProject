@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,9 @@ namespace Pictures.Core.Modals
 {
     public class User
     {
+        [Key]
         public int Id { get; set; } // מזהה ייחודי
+        public int UserId { get; set; } 
         public string Name { get; set; } = string.Empty; // שם משתמש
         public string Email { get; set; } = string.Empty; // אימייל ייחודי
         public string PasswordHash { get; set; } = string.Empty; // סיסמה מוצפנת
