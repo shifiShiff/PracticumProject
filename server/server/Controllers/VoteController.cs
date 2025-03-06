@@ -6,35 +6,35 @@ namespace Pictures.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserContriller : ControllerBase
+    public class VoteController : ControllerBase
     {
-        // GET: api/<UserContriller>
+        // GET: api/<VoteController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<UserContriller>/5
+        // GET api/<VoteController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<UserContriller>
+        // POST api/<VoteController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<UserContriller>/5
+        // PUT api/<VoteController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<UserContriller>/5
+        // DELETE api/<VoteController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

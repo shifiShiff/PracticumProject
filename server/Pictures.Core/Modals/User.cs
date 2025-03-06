@@ -16,8 +16,8 @@ namespace Pictures.Core.Modals
         public string Name { get; set; } = string.Empty; // שם משתמש
         public string Email { get; set; } = string.Empty; // אימייל ייחודי
         public string PasswordHash { get; set; } = string.Empty; // סיסמה מוצפנת
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // תאריך יצירה
-        public List<Image> Images { get; set; } = new List<Image>(); // תמונות שהמשתמש העלה
+        public DateTime CreatedAt { get; set; } = DateTime.Now; // תאריך יצירה
+        //public List<Image> Images { get; set; } = new List<Image>(); // תמונות שהמשתמש העלה
     }
 
 }

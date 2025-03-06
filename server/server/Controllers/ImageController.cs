@@ -1,4 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Pictures.Core.DTOs;
+using Pictures.Core.Modals;
+using Pictures.Core.Service;
+using Pictures.Services;
 using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,6 +13,13 @@ namespace Pictures.API.Controllers
     [ApiController]
     public class ImageController : ControllerBase
     {
+
+        private readonly IImageService _imageService;
+
+        public ImageController(IImageService imageService)
+        {
+            _imageService = imageService;
+        }
         //[HttpGet("api/images")]
         //public async Task<IActionResult> GetAllImages([FromServices] AppDbContext context)
         //{
@@ -24,6 +35,69 @@ namespace Pictures.API.Controllers
         //    return Ok(topImage);
         //}
 
+        //שליפת כל התמונות
+        [HttpGet]
+        public async Task<ActionResult<Image>> GetAllImagesAsync()
+        {
+            var ImageList = await _imageService.GetAllImagesAsync();
+            return Ok(ImageList);
+        }
+
+        //שליפת התמונה הזוכה לפי אתגר
+        [HttpGet("TopImage{ChallengeId}")]
+        public async Task<ActionResult<Image>> GetTopImageAsync(int ChallengeId)
+        {
+            return await _imageService.GetTopImageAsync(ChallengeId);
+        }
+
+        //שליפת רשימת תמונות לפי אתגר
+        [HttpGet("{ChallengeId}")]
+        public async Task<ActionResult<Image>> GetImagesByChallenge(int ChallengeId)
+        {
+            var list= await _imageService.GetImagesByChallengeAsync(ChallengeId);
+            return Ok(list);
+        }
+
+        //הוספת תמונה
+        [HttpPost]
+        public async Task<ActionResult<bool>> PostAsync([FromBody] ImagePost image)
+        {
+            if (await _imageService.AddImageAsync(image))
+                return Ok(true);
+            return BadRequest(false);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<bool>> PutAsync(int id, [FromBody] ImagePost image)
+        {
+            if (await _imageService.UpdateImageAsync(id, image))
+            {
+                return Ok(true);
+            }
+            return BadRequest(false);
+        }
+
+        [HttpPut("Increase/{id}")]
+        public async Task<ActionResult<bool>> PutVotesAsync(int id)
+        {
+            if (await _imageService.UpdateImageVoteAsync(id))
+            {
+                return Ok(true);
+            }
+            return BadRequest(false);
+        }
+
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteImageAsync(int id)
+        {
+            if (await _imageService.DeleteImageAsync(id))
+            {
+                return Ok(true);
+            }
+            return BadRequest(true);
+
+        }
 
     }
 }
