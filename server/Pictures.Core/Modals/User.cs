@@ -12,12 +12,13 @@ namespace Pictures.Core.Modals
     {
         [Key]
         public int Id { get; set; } // מזהה ייחודי
-        public int UserId { get; set; } 
-        public string Name { get; set; } = string.Empty; // שם משתמש
-        public string Email { get; set; } = string.Empty; // אימייל ייחודי
-        public string PasswordHash { get; set; } = string.Empty; // סיסמה מוצפנת
+        public string UserId { get; set; } 
+        public string Name { get; set; } // שם משתמש
+        public string Email { get; set; }  // אימייל ייחודי
+        public string PasswordHash { get; set; } // סיסמה מוצפנת
         public DateTime CreatedAt { get; set; } = DateTime.Now; // תאריך יצירה
-        //public List<Image> Images { get; set; } = new List<Image>(); // תמונות שהמשתמש העלה
+        public string Role { get; set; } = "User"; // "User" = משתמש רגיל, "Admin" = מנהל
+
     }
 
 }

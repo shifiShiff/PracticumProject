@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Pictures.Core.DTOs;
+using Pictures.Core.Modals;
+using Pictures.Core.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,24 +11,35 @@ namespace Pictures.API.Controllers
     [ApiController]
     public class VoteController : ControllerBase
     {
-        // GET: api/<VoteController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        private readonly IVoteService _IvoteService;
+        public VoteController(IVoteService IvoteService)
         {
-            return new string[] { "value1", "value2" };
+            _IvoteService = IvoteService;
         }
+        // שליפת כל ההצבעות לאתגר מסוים
+        //[HttpGet("{challengeId}")]
+        //public async Task<ActionResult<Vote> Get(int challengeId)
+        //{
+        //    var list= await 
+        //}
 
         // GET api/<VoteController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        //[HttpGet("{id}")]
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
 
-        // POST api/<VoteController>
+        //הוספת הצבעה
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<bool>> AddVote([FromBody] VotePost vote)
         {
+            if(await _IvoteService.AddVote(vote))
+            {
+                return Ok(true);
+            }
+            return BadRequest(false);
         }
 
         // PUT api/<VoteController>/5

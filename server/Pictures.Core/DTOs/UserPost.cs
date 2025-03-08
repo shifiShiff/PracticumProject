@@ -8,9 +8,9 @@ namespace Pictures.Core.DTOs
 {
     public class UserPost
     {
-        public int UserId { get; set; }
-        public string Name { get; set; } = string.Empty; // שם משתמש
-        public string Email { get; set; } = string.Empty; // אימייל ייחודי
-        public string PasswordHash { get; set; } = string.Empty; // סיסמה מוצפנת
+        public string UserId { get; set; }
+        public string Name { get; set; }// שם משתמש
+        public string Email { get; set; } // אימייל ייחודי
+        public string PasswordHash { get; set; } // סיסמה מוצפנת
     }
 }

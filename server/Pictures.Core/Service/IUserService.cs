@@ -11,9 +11,9 @@ namespace Pictures.Core.Service
     public interface IUserService
     {
         public Task<List<User>> GetAllUsersAsync();
-        public Task<User> GetUserByIdAsync(int id);
+        public Task<User> GetUserByIdAsync(string id);
         public Task<bool> AddUserAsync(UserPost user);
-        public Task<bool> UpdateUserAsync(int id,UserPost user);
-        public Task<bool> DeleteUserAsync(int id);
+        public Task<bool> UpdateUserAsync(string id,UserPost user);
+        public Task<bool> DeleteUserAsync(string id);
     }
 }

@@ -67,6 +67,8 @@ namespace Pictures.API.Controllers
             return BadRequest(false);
         }
 
+
+        //עדכון תמונה
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> PutAsync(int id, [FromBody] ImagePost image)
         {
@@ -77,6 +79,7 @@ namespace Pictures.API.Controllers
             return BadRequest(false);
         }
 
+        //עדכון מספר ההצבעות
         [HttpPut("Increase/{id}")]
         public async Task<ActionResult<bool>> PutVotesAsync(int id)
         {
@@ -87,7 +90,7 @@ namespace Pictures.API.Controllers
             return BadRequest(false);
         }
 
-
+        //מחיקת תמונה
         [HttpDelete("{id}")]
         public async Task<ActionResult<bool>> DeleteImageAsync(int id)
         {

@@ -13,6 +13,7 @@ namespace Pictures.API.Controllers
     {
 
         private readonly IUserService _userService;
+
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -28,7 +29,7 @@ namespace Pictures.API.Controllers
 
         // שליפת נתוני משתמש ע"פ ID 
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserByIdAsync(int id)
+        public async Task<ActionResult<User>> GetUserByIdAsync(string id)
         {
             var user = await _userService.GetUserByIdAsync(id);
             if (user == null)
@@ -41,7 +42,7 @@ namespace Pictures.API.Controllers
 
         // שליפת כתובת מייל של משתמש ע"פ ID 
         [HttpGet("userEmail/{id}")]
-        public async Task<ActionResult<string>> GetUserEmailByIdAsync(int id)
+        public async Task<ActionResult<string>> GetUserEmailByIdAsync(string id)
         {
             var user =await _userService.GetUserByIdAsync(id);
             if(user == null)
@@ -57,6 +58,7 @@ namespace Pictures.API.Controllers
         {
             if (await _userService.AddUserAsync(user))
             {
+                
                 return Ok(true);
             }
             return BadRequest(false);
@@ -65,7 +67,7 @@ namespace Pictures.API.Controllers
 
         // עדכון משתמש
         [HttpPut("{id}")]
-        public async Task<ActionResult<bool>> PutAsync(int id, [FromBody] UserPost user)
+        public async Task<ActionResult<bool>> PutAsync(string id, [FromBody] UserPost user)
         {
             if (await _userService.UpdateUserAsync(id, user))
             {
@@ -77,7 +79,7 @@ namespace Pictures.API.Controllers
 
         // מחיקת משתמש
         [HttpDelete("{id}")]
-        public async Task<ActionResult<bool>> DeleteUserAsync(int id)
+        public async Task<ActionResult<bool>> DeleteUserAsync(string id)
         {
             if(await _userService.DeleteUserAsync(id))
             {

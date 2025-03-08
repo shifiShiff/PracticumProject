@@ -10,9 +10,9 @@ namespace Pictures.Core.Reposetory
     public interface IUserReposetory
     {
         public Task<List<User>> GetAllUsersAsync();
-        public Task<User> GetUserByIdAsync(int id);
+        public Task<User> GetUserByIdAsync(string id);
         public Task<bool> AddUserAsync(User user);
-        public Task<bool> UpdateUserAsync(int id, User user);
-        public Task<bool> DeleteUserAsync(int id);
+        public Task<bool> UpdateUserAsync(string id, User user);
+        public Task<bool> DeleteUserAsync(string id);
     }
 }

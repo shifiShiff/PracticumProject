@@ -9,6 +9,10 @@ namespace Pictures.Data.Reposetories
 {
     public class ChallengeReposetory :IChallengeReposetory
     {
-        private readonly DataContext context;
+        private readonly DataContext _context;
+        public ChallengeReposetory(DataContext context)
+        {
+            _context = context;
+        }
     }
 }

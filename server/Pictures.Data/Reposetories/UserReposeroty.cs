@@ -22,19 +22,30 @@ namespace Pictures.Data.Reposetories
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<User> GetUserByIdAsync(string id)
         {
             return await _context.Users.FirstOrDefaultAsync(user => user.UserId == id);
         }
 
         public async Task<bool> AddUserAsync(User user)
         {
+            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+            if (existingUser != null)
+            {
+                return false; // המשתמש כבר קיים
+            }
+            var passwordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+            user.PasswordHash = passwordHash;
+            user.Role = "User";
+
+
             _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+
             return true;
         }
 
-        public async Task<bool> UpdateUserAsync(int id, User user)
+        public async Task<bool> UpdateUserAsync(string id, User user)
         {
             var originUser=await GetUserByIdAsync(id);
             if (originUser != null)
@@ -49,7 +60,7 @@ namespace Pictures.Data.Reposetories
             return false;
         }
 
-        public async Task<bool> DeleteUserAsync(int id)
+        public async Task<bool> DeleteUserAsync(string id)
         {
             //var user = await GetUserByIdAsync(id);
             var user = await _context.Users.FirstOrDefaultAsync(user => user.UserId == id);
