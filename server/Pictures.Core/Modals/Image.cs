@@ -11,10 +11,11 @@ namespace Pictures.Core.Modals
     {
         [Key]
         public int Id { get; set; } // מזהה ייחודי
+        public string FileName { get; set; }
         public int UserId { get; set; } // FK למשתמש שהעלה
         public int ChallengeId { get; set; }
-        public string ImageUrl { get; set; } = string.Empty; // URL של התמונה (S3 או לוקאלי)
+        public string ImageUrl { get; set; } // URL של התמונה (S3 או לוקאלי)
         public int Votes { get; set; } = 0; // כמות הצבעות
-        public DateTime CreatedAt { get; set; } = DateTime.Now; // תאריך העלאה
+        public DateTime UploadedAt { get; set; } = DateTime.Now; // תאריך העלאה
     }
 }

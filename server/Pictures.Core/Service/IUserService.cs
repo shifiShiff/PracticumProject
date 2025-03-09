@@ -15,5 +15,8 @@ namespace Pictures.Core.Service
         public Task<bool> AddUserAsync(UserPost user);
         public Task<bool> UpdateUserAsync(string id,UserPost user);
         public Task<bool> DeleteUserAsync(string id);
+        string GenerateJwtToken(string email, string role);
+        Task<User> GetUserByMail(string email);
+
     }
 }

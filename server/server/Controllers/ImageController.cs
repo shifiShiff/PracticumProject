@@ -79,16 +79,18 @@ namespace Pictures.API.Controllers
             return BadRequest(false);
         }
 
+
         //עדכון מספר ההצבעות
-        [HttpPut("Increase/{id}")]
-        public async Task<ActionResult<bool>> PutVotesAsync(int id)
-        {
-            if (await _imageService.UpdateImageVoteAsync(id))
-            {
-                return Ok(true);
-            }
-            return BadRequest(false);
-        }
+        //[HttpPut("Increase/{id}")]
+        //public async Task<ActionResult<bool>> PutVotesAsync(int id)
+        //{
+        //    if (await _imageService.UpdateImageVoteAsync(id))
+        //    {
+        //        return Ok(true);
+        //    }
+        //    return BadRequest(false);
+        //}
+
 
         //מחיקת תמונה
         [HttpDelete("{id}")]

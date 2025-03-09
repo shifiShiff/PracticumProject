@@ -19,7 +19,7 @@ namespace Pictures.Data.Reposetories
 
         public async Task<User> GetUserByMail(string email)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
             return user;
 
         }

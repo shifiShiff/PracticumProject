@@ -26,7 +26,12 @@ namespace Pictures.Data.Reposetories
         {
             return await _context.Users.FirstOrDefaultAsync(user => user.UserId == id);
         }
+        public async Task<User> GetUserByMail(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+            return user;
 
+        }
         public async Task<bool> AddUserAsync(User user)
         {
             var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);

@@ -13,9 +13,11 @@ namespace Pictures.API.Controllers
     {
 
         private readonly IVoteService _IvoteService;
-        public VoteController(IVoteService IvoteService)
+        private readonly IImageService _IImageService;
+        public VoteController(IVoteService IvoteService, IImageService IImageService)
         {
             _IvoteService = IvoteService;
+            _IImageService = IImageService;
         }
         // שליפת כל ההצבעות לאתגר מסוים
         //[HttpGet("{challengeId}")]
@@ -37,6 +39,8 @@ namespace Pictures.API.Controllers
         {
             if(await _IvoteService.AddVote(vote))
             {
+                //הוספת הצבעה לתמונה
+                await _IImageService.UpdateImageVoteAsync(vote.ImageId);
                 return Ok(true);
             }
             return BadRequest(false);

@@ -14,5 +14,6 @@ namespace Pictures.Core.Reposetory
         public Task<bool> AddUserAsync(User user);
         public Task<bool> UpdateUserAsync(string id, User user);
         public Task<bool> DeleteUserAsync(string id);
+        Task<User> GetUserByMail(string email);
     }
 }

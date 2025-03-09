@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Pictures.Core.DTOs;
 using Pictures.Core.Modals;
 using Pictures.Core.Service;
+using Pictures.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Pictures.API.Controllers
 {
@@ -21,6 +22,7 @@ namespace Pictures.API.Controllers
 
         //שליפת כל משתמשים
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> GetAllUsersAsync()
         {
             var userList = await _userService.GetAllUsersAsync();
@@ -29,6 +31,7 @@ namespace Pictures.API.Controllers
 
         // שליפת נתוני משתמש ע"פ ID 
         [HttpGet("{id}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<User>> GetUserByIdAsync(string id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -42,6 +45,7 @@ namespace Pictures.API.Controllers
 
         // שליפת כתובת מייל של משתמש ע"פ ID 
         [HttpGet("userEmail/{id}")]
+        [Authorize(Roles = "User")] 
         public async Task<ActionResult<string>> GetUserEmailByIdAsync(string id)
         {
             var user =await _userService.GetUserByIdAsync(id);
@@ -53,17 +57,32 @@ namespace Pictures.API.Controllers
         }
 
         // הוספת משתמש חדש
-        [HttpPost]
-        public async Task<ActionResult<bool>> PostAsync([FromBody] UserPost user)
+        [HttpPost("register")]
+        public async Task<ActionResult<string>> PostAsync([FromBody] UserPost user)
         {
             if (await _userService.AddUserAsync(user))
             {
-                
-                return Ok(true);
+                var token = _userService.GenerateJwtToken(user.Email, "User");
+                return Ok(new { Token = token });
+
             }
             return BadRequest(false);
 
         }
+
+        //כניסה למשתמש מחובר
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] LoginModel model)
+        {
+            var user = await _userService.GetUserByMail(model.Email);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash))
+                return Unauthorized();
+
+
+            var token = _userService.GenerateJwtToken(user.Email, user.Role);
+            return Ok(new { Token = token });
+        }
+
 
         // עדכון משתמש
         [HttpPut("{id}")]
