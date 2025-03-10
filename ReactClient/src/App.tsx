@@ -14,16 +14,19 @@
 // export default App
 
 import './App.css'
+import ImageGallery from './components/imageGallery'
 import Login from './components/login'
+import Register from './components/register'
 import UploadFile from './components/uploadFile' // ייבוא הקומפוננטה
 
 function App() {
   return (
     <>
    
-      <h1>Upload Your Image</h1>
-      <UploadFile /> {/* הוספת הקומפוננטה להצגת טופס ההעלאה */}
-      <div> <Login/></div>
+      {/* <UploadFile />  */}
+      {/* <div> <Login/></div> */}
+      {/* <div><Register/></div> */}
+      <div><ImageGallery/></div>
     </>
   )
 }
