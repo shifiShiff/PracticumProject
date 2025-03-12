@@ -71,9 +71,10 @@
 
 
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
+import userStore from '../store/userStore';
 
 const Register: React.FC = () => {
   const [registerError, setRegisterError] = useState('');
@@ -92,6 +93,8 @@ const Register: React.FC = () => {
         PasswordHash: data.password
       });
       localStorage.setItem("token", response.data.token);
+      userStore.register({email: data.email, password: data.password});
+      localStorage.setItem("userId", response.data.userId);
       console.log("register successfully", response.data);
     } catch (error) {
       console.error("register failed", error);

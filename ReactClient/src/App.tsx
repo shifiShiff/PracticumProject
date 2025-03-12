@@ -13,20 +13,16 @@
 
 // export default App
 
+import { RouterProvider } from 'react-router-dom'
 import './App.css'
-import ImageGallery from './components/imageGallery'
-import Login from './components/login'
-import Register from './components/register'
-import UploadFile from './components/uploadFile' // ייבוא הקומפוננטה
+
+import { myRouter } from './Router'
 
 function App() {
   return (
     <>
-   
-      {/* <UploadFile />  */}
-      {/* <div> <Login/></div> */}
-      {/* <div><Register/></div> */}
-      <div><ImageGallery/></div>
+      <RouterProvider router={myRouter} />
+
     </>
   )
 }
