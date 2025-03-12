@@ -38,17 +38,15 @@ namespace Pictures.Services
             return await _imageReposetory.GetImagesByChallengeAsync(ChallengeId);
         }
 
-<<<<<<< HEAD
         public async Task<bool> AddImageAsync(ImagePost image)
         {
-            var tmp= _mapper.Map<Image>(image);
+            var tmp = _mapper.Map<Image>(image);
             return await _imageReposetory.AddImageAsync(tmp);
-=======
+        }
         public async Task<bool> AddImageAsync(Image image)
         {
             //var tmp= _mapper.Map<Image>(image);
             return await _imageReposetory.AddImageAsync(image);
->>>>>>> 810b253 (pish without key)
         }
 
         public async Task<bool> UpdateImageAsync(int id, ImagePost image)

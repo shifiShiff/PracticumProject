@@ -30,6 +30,9 @@ namespace Pictures.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -37,25 +40,15 @@ namespace Pictures.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("WinnerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("WinnerImageId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("WinnerImageId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -73,25 +66,17 @@ namespace Pictures.Data.Migrations
                     b.Property<int>("ChallengeId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-=======
                     b.Property<string>("FileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
->>>>>>> 810b253 (pish without key)
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
-=======
                     b.Property<DateTime>("UploadedAt")
                         .HasColumnType("datetime2");
 
->>>>>>> 810b253 (pish without key)
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 

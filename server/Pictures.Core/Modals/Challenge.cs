@@ -11,14 +11,14 @@ namespace Pictures.Core.Modals
     {
         [Key]
         public int Id { get; set; }
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; } 
         public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        //public DateTime StartDate { get; set; }
+        //public DateTime EndDate { get; set; }
+        public bool Active { get; set; } = true;
         public int WinnerId { get; set; } // מזהה המשתמש הזוכה (אם יש)
-        public string WinnerImageId { get; set; } // ה-Key של התמונה הזוכה ב-S3
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? UpdatedAt { get; set; }
+        public int WinnerImageId { get; set; }  // ה-Key של התמונה הזוכה ב-S3
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 
 }

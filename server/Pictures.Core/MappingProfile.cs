@@ -16,6 +16,7 @@ namespace Pictures.Core
             CreateMap<UserPost,User>().ReverseMap();
             CreateMap<ImagePost,Image>().ReverseMap();
             CreateMap<VotePost,Vote>().ReverseMap();
+            CreateMap<ChallengePost,Challenge>().ReverseMap();
         }
     }
 }

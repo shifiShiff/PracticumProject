@@ -32,12 +32,12 @@ namespace Pictures.Data.Reposetories
             return user;
 
         }
-        public async Task<bool> AddUserAsync(User user)
+        public async Task<User> AddUserAsync(User user)
         {
             var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
             if (existingUser != null)
             {
-                return false; // המשתמש כבר קיים
+                return null; // המשתמש כבר קיים
             }
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
             user.PasswordHash = passwordHash;
@@ -47,7 +47,7 @@ namespace Pictures.Data.Reposetories
             _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            return true;
+            return user;
         }
 
         public async Task<bool> UpdateUserAsync(string id, User user)

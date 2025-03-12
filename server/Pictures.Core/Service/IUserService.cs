@@ -12,7 +12,7 @@ namespace Pictures.Core.Service
     {
         public Task<List<User>> GetAllUsersAsync();
         public Task<User> GetUserByIdAsync(string id);
-        public Task<bool> AddUserAsync(UserPost user);
+        public Task<User> AddUserAsync(UserPost user);
         public Task<bool> UpdateUserAsync(string id,UserPost user);
         public Task<bool> DeleteUserAsync(string id);
         string GenerateJwtToken(string email, string role);

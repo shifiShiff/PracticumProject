@@ -26,6 +26,8 @@ builder.Services.AddScoped<IImageReposetory, ImageReposetory>();
 builder.Services.AddScoped<IUserReposetory, UserReposeroty>();
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IAuthReposetory,AuthReposetory>();
+builder.Services.AddScoped<IChallengeService,ChallengeService>();
+builder.Services.AddScoped<IChallengeReposetory, ChallengeReposetory>();
 
 builder.Services.AddDbContext<DataContext>();
 

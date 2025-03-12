@@ -36,7 +36,7 @@ namespace Pictures.Services
             return await _userReposetory.GetUserByIdAsync(id);
         }
 
-        public async Task<bool> AddUserAsync(UserPost user)
+        public async Task<User> AddUserAsync(UserPost user)
         {
             var tmp = _mapper.Map<User>(user);
             return await _userReposetory.AddUserAsync(tmp);

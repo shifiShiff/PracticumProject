@@ -44,11 +44,8 @@ namespace Pictures.Data.Reposetories
         public async Task<bool> AddImageAsync(Image image)
         {
             _context.Images.Add(image);
-<<<<<<< HEAD
-            _context.SaveChangesAsync();
-=======
+
             await _context.SaveChangesAsync();
->>>>>>> 810b253 (pish without key)
             return true;
         }
 

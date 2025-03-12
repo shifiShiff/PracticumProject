@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Pictures.Core.DTOs;
+using Pictures.Core.Modals;
+using Pictures.Core.Service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,49 @@ namespace Pictures.API.Controllers
     [ApiController]
     public class ChallengeController : ControllerBase
     {
-        // GET: api/<ChallengeController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IChallengeService _challengeService;
+        public ChallengeController(IChallengeService challengeService)
         {
-            return new string[] { "value1", "value2" };
+            _challengeService = challengeService;
         }
 
-        // GET api/<ChallengeController>/5
+        //שליפת האתגר הנוכחי
+        [HttpGet("current")]
+        public async Task<ActionResult<int>> GetCurrentChallengeAsync()
+        {
+            var challenge =await _challengeService.GetCurrentChallengeAsync();
+            if (challenge != 0)
+            {
+                return Ok(challenge);
+            }
+            return BadRequest(false);
+        }
+
+        //GET api/<ChallengeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Challenge>> GetChallengeById(int id)
         {
-            return "value";
+            return await _challengeService.GetChallengeById(id);
         }
 
-        // POST api/<ChallengeController>
+        //POST api/<ChallengeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<bool>> PostAsync([FromBody] ChallengePost challenge)
         {
+            return await _challengeService.PostAsync(challenge);
         }
 
         // PUT api/<ChallengeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<bool>> Put(int id)
         {
+            return await _challengeService.UpdateActiveAsync(id);
         }
 
-        // DELETE api/<ChallengeController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //// DELETE api/<ChallengeController>/5
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

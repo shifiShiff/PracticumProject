@@ -59,15 +59,7 @@ namespace Pictures.API.Controllers
         }
 
         //הוספת תמונה
-<<<<<<< HEAD
-        [HttpPost]
-        public async Task<ActionResult<bool>> PostAsync([FromBody] ImagePost image)
-        {
-            if (await _imageService.AddImageAsync(image))
-                return Ok(true);
-            return BadRequest(false);
-        }
-=======
+      
         //[HttpPost]
         //public async Task<ActionResult<bool>> PostAsync([FromBody] ImagePost image)
         //{
@@ -75,7 +67,6 @@ namespace Pictures.API.Controllers
         //        return Ok(true);
         //    return BadRequest(false);
         //}
->>>>>>> 810b253 (pish without key)
 
 
         //עדכון תמונה

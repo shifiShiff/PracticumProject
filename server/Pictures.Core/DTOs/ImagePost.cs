@@ -10,9 +10,6 @@ namespace Pictures.Core.DTOs
     {
         public int UserId { get; set; } // מזהה המשתמש שהצביע
         public int ChallengeId { get; set; }
-<<<<<<< HEAD
         public int ImageId { get; set; } 
-=======
->>>>>>> 810b253 (pish without key)
     }
 }
