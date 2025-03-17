@@ -71,15 +71,17 @@
 
 
 import axios from 'axios';
-import React, { use, useState } from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import userStore from '../store/userStore';
+import { useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const [registerError, setRegisterError] = useState('');
 
   const { control, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
     setRegisterError('');
@@ -96,6 +98,7 @@ const Register: React.FC = () => {
       userStore.register({email: data.email, password: data.password});
       localStorage.setItem("userId", response.data.userId);
       console.log("register successfully", response.data);
+      navigate('/dashboard');
     } catch (error) {
       console.error("register failed", error);
       setRegisterError("Registration failed. Please try again.");
@@ -134,7 +137,7 @@ const Register: React.FC = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.id}
-                helperText={errors.id?.message || ""}
+                helperText={errors.id?.message as string || ""}
               />
             )}
           />
@@ -152,7 +155,7 @@ const Register: React.FC = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.name}
-                helperText={errors.name?.message || ""}
+                helperText={errors.name?.message as string || ""}
               />
             )}
           />
@@ -177,7 +180,7 @@ const Register: React.FC = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.email}
-                helperText={errors.email?.message || ""}
+                helperText={errors.email?.message as string || ""}
               />
             )}
           />
@@ -202,7 +205,7 @@ const Register: React.FC = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.password}
-                helperText={errors.password?.message || ""}
+                helperText={errors.password?.message as string || ""}
               />
             )}
           />

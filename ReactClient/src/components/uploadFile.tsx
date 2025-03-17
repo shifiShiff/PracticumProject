@@ -2,79 +2,99 @@ import axios from "axios";
 import { useState } from "react";
 import ImageStore from "../store/ImageStore";
 import { useNavigate } from 'react-router-dom';
+import LinearProgress from '@mui/material/LinearProgress';
+import '../App.css'; // ודא שה-CSS מיובא
+
+const UploadFile = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [finished, setFinished] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState<boolean | null>(null); // במקום false
+  const navigate = useNavigate();
 
 
-const UploadFile=()=>{
-        const [file, setFile] = useState(null);
-        const [uploading, setUploading] = useState(false);
-        const [finished, setFinished] = useState(false);
-        const [uploadSuccess, setUploadSuccess] = useState<boolean | null>(null); // במקום false
-        const navigate = useNavigate();
+  const handleFileChange = (e: any) => {
+    const selectedFile = e.target.files[0];
+    const maxSizeInMB = 10;
+    const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
 
-        // פונקציה שתופסת את הקובץ שנבחר
-        const handleFileChange = (e:any) => {
-          const selectedFile = e.target.files[0];
-          setFile(selectedFile);
-        };
-      
-        // פונקציה שתשלח את הקובץ ל-API
-        const handleUpload = async () => {
-          if (!file) {
-            alert("Please select a file.");
-            return;
-          }
-      
-          setUploading(true);
-          const formData = new FormData();
-          formData.append('file', file);  // מוסיף את הקובץ ל-formData
-     
-        try {
-          const currentChallengeResponse = await axios.get('http://localhost:5131/api/Challenge/current');
-          const challengeId = currentChallengeResponse.data;
-          console.log(challengeId);
-          
+    if (selectedFile.size > maxSizeInBytes) {
+      alert(`File size exceeds ${maxSizeInMB} MB. Please select a smaller file.`);
+      setFile(null);
+      e.target.value = null;
+    } else {
+      setFile(selectedFile);
+    }
+  };
 
-          const userId=localStorage.getItem('userId')
-          console.log(userId);
-          
-            const response = await axios.post(`http://localhost:5131/api/Upload/upload-file/${userId}/${challengeId}`, formData
+  const handleUpload = async () => {
+    if (!file) {
+      alert("Please select a file.");
+      return;
+    }
 
-          );
-      
-            console.log("File uploaded successfully", response.data);
-            setUploadSuccess(true);
-            await ImageStore.getAllImages();
-            setFinished(true);
-            // navigate('/dashboard/');
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);  // מוסיף את הקובץ ל-formData
 
-          } catch (error) {
-            console.error("Error uploading file", error);
-            setUploadSuccess(false);
-          } finally {
-            setUploading(false);
-          }
-        };
-      
-        return (
-          <div style= {{ position: 'fixed',top:'50%', left:'50%',    transform: 'translate(-50%, -50%)', 
-            width: 'auto', zIndex: 99,display:'flex', flexDirection: 'column', gap: '10px' }}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-            <button style={{border:'solid 1px black', width:'auto', marginTop:'15px'}} onClick={handleUpload} disabled={uploading}>
-              {uploading ? "Uploading..." : "Upload Image"}
-            </button>
-      
-            {uploadSuccess === true && <p>File uploaded successfully!</p>}
-            {uploadSuccess === false && <p>Upload failed. Try again.</p>}
+    try {
+      const currentChallengeResponse = await axios.get('http://localhost:5131/api/Challenge/current');
+      const challengeId = currentChallengeResponse.data;
+      console.log(challengeId);
 
 
-            {finished && <button style={{border:'solid 1px black', width:'auto', marginTop:'15px'}} onClick={()=>navigate('/dashboard/')}>Go to dashboard</button>}
-          </div>
-        );
-      };
-    
-      
+      const userId = localStorage.getItem('userId')
+      console.log(userId);
+
+      const response = await axios.post(`http://localhost:5131/api/Upload/upload-file/${userId}/${challengeId}`, formData
+
+      );
+
+      console.log("File uploaded successfully", response.data);
+      setUploadSuccess(true);
+      await ImageStore.getAllImages();
+      setFinished(true);
+      // navigate('/dashboard/');
+
+    } catch (error) {
+      console.error("Error uploading file", error);
+      setUploadSuccess(false);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div style={{
+      position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
+      width: 'auto', zIndex: 99, display: 'flex', flexDirection: 'column', gap: '10px'
+    }}>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="hidden-file-input"
+        id="file-input"
+      />
+      <label htmlFor="file-input" className="custom-file-upload">
+        Choose File
+      </label>
+      {file && <p style={{ marginTop: '10px' }}>{file.name}</p>}
+
+      <button style={{ border: 'solid 1px black', width: 'auto', marginTop: '15px' }} onClick={handleUpload} disabled={uploading}>
+        {uploading ? <LinearProgress style={{ width: '100%' }} /> : "Upload Image"}
+      </button>
+
+      {uploadSuccess === true && <p>File uploaded successfully!</p>}
+      {uploadSuccess === false && <p>Upload failed. Try again.</p>}
+
+
+      {finished && <button style={{ border: 'solid 1px black', width: 'auto', marginTop: '15px' }} onClick={() => navigate('/dashboard/')}>Go to dashboard</button>}
+    </div>
+  );
+};
+
+
 export default UploadFile;
+
+

@@ -121,15 +121,14 @@ import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import userStore from "../store/userStore";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  // State for error message (if validation fails)
   const [loginError, setLoginError] = useState("");
 
-  // useForm hook from react-hook-form
   const { control, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
 
-  // Function to handle form submission
   const onSubmit = async (data: any) => {
     setLoginError("");
     console.log(data);
@@ -139,6 +138,7 @@ const Login = () => {
     localStorage.setItem("userId", response.data.userId);
     userStore.login({ email: data.email, password: data.password });
     console.log("login successfully", response.data);
+    navigate('/dashboard');
       } catch (error) {
         console.error("login failed", error);
       }
@@ -185,7 +185,7 @@ const Login = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.email}
-                helperText={errors.email ? errors.email.message : ""}
+                helperText={errors.email ? (errors.email.message as string) || "" : ""}
               />
             )}
           />
@@ -211,7 +211,8 @@ const Login = () => {
                 fullWidth
                 margin="normal"
                 error={!!errors.password}
-                helperText={errors.password?.message || ""}
+                helperText={errors.password?.message as string || ""}
+
               />
             )}
           />

@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-.logo {
+/* .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
@@ -39,4 +39,46 @@
 
 .read-the-docs {
   color: #888;
+} */
+
+
+
+/* .hidden-file-input {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #ee0b0b;
+  text-align: center;
+}
+
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
+} */
+
+
+
+.hidden-file-input {
+  display: none;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #333;
+  text-align: center;
+}
+
+.custom-file-upload:hover {
+  background-color: #e0e0e0;
 }
