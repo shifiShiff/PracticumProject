@@ -1,9 +1,10 @@
-import axios from "axios";
+// import axios from "axios";
 import { useState } from "react";
 import ImageStore from "../store/ImageStore";
 import { useNavigate } from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
 import '../App.css'; // ודא שה-CSS מיובא
+import apiClient from "./interceptor";
 
 const UploadFile = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -38,7 +39,7 @@ const UploadFile = () => {
     formData.append('file', file);  // מוסיף את הקובץ ל-formData
 
     try {
-      const currentChallengeResponse = await axios.get('http://localhost:5131/api/Challenge/current');
+      const currentChallengeResponse = await apiClient.get('http://localhost:5131/api/Challenge/current');
       const challengeId = currentChallengeResponse.data;
       console.log(challengeId);
 
@@ -46,7 +47,7 @@ const UploadFile = () => {
       const userId = localStorage.getItem('userId')
       console.log(userId);
 
-      const response = await axios.post(`http://localhost:5131/api/Upload/upload-file/${userId}/${challengeId}`, formData
+      const response = await apiClient.post(`http://localhost:5131/api/Upload/upload-file/${userId}/${challengeId}`, formData
 
       );
 

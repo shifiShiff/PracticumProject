@@ -5,6 +5,8 @@ import Register from "./components/register";
 import Login from "./components/login"; 
 import UploadFile from "./components/uploadFile";
 import Dashboard from "./components/dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Auth from "./components/auth";
 
 
 
@@ -13,23 +15,32 @@ export const myRouter = createBrowserRouter([
         path: '/',
         element: <AppLayout />,
         errorElement: <>main error</>,
-        children: [           
+        children: [ 
+            {
+                index: true, // נתיב ברירת מחדל
+                element: <Dashboard />
+            },          
             {
                 path: 'dashboard', element: <Dashboard />
-                // ,children: [ {
-
-                //     path: 'uploadfile', element: <UploadFile />
-                // }]
 
             },
             {
-                path: 'uploadfile', element: <UploadFile />
+                path: 'uploadfile', 
+                // element: <UploadFile />
+                element: (
+                    <ProtectedRoute>
+                      <UploadFile />
+                    </ProtectedRoute>
+                  )
             },
             {
                 path: 'Gallery', element: <ImageGallery />
             },
             {
                 path: 'login', element: <Login />
+            },
+            {
+                path: 'auth', element: <Auth />
             },
             {
                 path: 'register', element: <Register/>

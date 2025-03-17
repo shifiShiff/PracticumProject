@@ -99,6 +99,8 @@ const Register: React.FC = () => {
       localStorage.setItem("userId", response.data.userId);
       console.log("register successfully", response.data);
       navigate('/dashboard');
+      window.dispatchEvent(new Event("storage"));
+
     } catch (error) {
       console.error("register failed", error);
       setRegisterError("Registration failed. Please try again.");

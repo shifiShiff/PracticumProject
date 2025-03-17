@@ -1,5 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 import { makeAutoObservable } from "mobx";
+import apiClient from "../components/interceptor";
 
 
 
@@ -19,22 +20,33 @@ class ImageStore {
 
 
   async getAllImages() {
+    // try {
+    //   const response = await axios.get("http://localhost:5131/api/Image");
+    //   this.imageList = response.data;
+    //   console.log("load images");
+    // } catch (error) {
+    //   console.error("Error fetching images:", error);
+    // }
     try {
-      const response = await axios.get("http://localhost:5131/api/Image");
+      const response = await apiClient.get("/Image"); // קריאה ל-API עם הטוקן
+      // const response = await apiClient.get("/http://localhost:5131/api/Image"); // קריאה ל-API עם הטוקן
+      console.log("load images"+response.data);
       this.imageList = response.data;
-      console.log("load images");
+
     } catch (error) {
-      console.error("Error fetching images:", error);
+      console.error("Error fetching data:", error);
     }
   }
   async getImageByChallengeId(challengeId: number) {
 
-    return (await axios.get(`http://localhost:5131/api/Image/${challengeId}`)).data;
+    // return (await axios.get(`http://localhost:5131/api/Image/${challengeId}`)).data;
+    return (await apiClient.get(`Image/${challengeId}`)).data;
+    // return (await apiClient.get(`http://localhost:5131/api/Image/${challengeId}`)).data;
   }
 
   async vote(challengeId:number|null, imageId: number,userId:string|null) {
     try {
-      await axios.post(`http://localhost:5131/api/Vote`, { 
+      await apiClient.post(`/Vote`, { 
         UserId: userId,
         ChallengeId: challengeId,
         ImageId: imageId,

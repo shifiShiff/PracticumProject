@@ -139,6 +139,7 @@ const Login = () => {
     userStore.login({ email: data.email, password: data.password });
     console.log("login successfully", response.data);
     navigate('/dashboard');
+    window.dispatchEvent(new Event("storage"));
       } catch (error) {
         console.error("login failed", error);
       }

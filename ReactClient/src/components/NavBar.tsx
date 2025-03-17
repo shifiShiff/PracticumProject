@@ -1,53 +1,33 @@
 
 
-// import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
-// import HomeIcon from '@mui/icons-material/Home';
-// import { Link } from "react-router-dom";
-
-// const NavBar = () => {
-//   return (
-//     <AppBar position="fixed" sx={{ backgroundColor: '#333' }}>
-//       <Toolbar>
-//         <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/dashboard">
-//           <HomeIcon />
-//         </IconButton>
-//         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-//           Photo Top
-//         </Typography>
-//         <Button color="inherit" component={Link} to="/login" sx={{ marginRight: 2 }}>
-//           Login
-//         </Button>
-//         <Button color="inherit" component={Link} to="/register" sx={{ marginRight: 2 }}>
-//           Register
-//         </Button>
-//         <Button color="inherit" component={Link} to="/uploadfile">
-//           Upload File
-//         </Button>
-//         <Button color="inherit" component={Link} to="/Gallery">
-//         Previous challenges
-//         </Button>
-//       </Toolbar>
-//     </AppBar>
-//   );
-// };
-
-// export default NavBar;
-
-
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 const NavBar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // בדיקת טוקן ראשונית
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem("token")); // עדכון המצב כאשר הטוקן משתנה
+    };
+
+    // האזנה לשינויים ב-localStorage
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange); // ניקוי האזנה
+    };
+  }, []);
   return (
-    <AppBar position="fixed" sx={{ background: 'linear-gradient(45deg,rgb(7, 195, 120) 30%,rgb(53, 237, 209) 90%)', padding: '5px 0' }}>
+    <AppBar position="fixed" sx={{ background: 'linear-gradient(45deg,rgb(6, 6, 6) 30%,rgb(66, 71, 70) 90%)', padding: '5px 0' }}>
       <Toolbar>
         {/* Home Button */}
-        <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/dashboard" sx={{ marginRight: 2, color: 'rgb(0, 0, 0)' }}>
+        <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/dashboard" sx={{ marginRight: 2, color: 'rgb(234, 11, 11)' }}>
           <HomeIcon sx={{ fontSize: 30 }} />
         </IconButton>
 
@@ -56,8 +36,27 @@ const NavBar = () => {
           Photo Top
         </Typography>
 
-        {/* Login Button */}
+
         <Button
+          color="inherit"
+          component={Link}
+          to="/auth"
+          startIcon={<LoginIcon />}
+          sx={{
+            marginRight: 2,
+            backgroundColor: '#FF8E53',
+            color: '#fff',
+            '&:hover': {
+              backgroundColor: '#FF7043',
+              color: 'rgb(0, 0, 0)'
+            },
+          }}
+        >
+          Sign in
+        </Button>
+
+        {/* Login Button */}
+        {/* <Button
           color="inherit"
           component={Link}
           to="/login"
@@ -73,10 +72,10 @@ const NavBar = () => {
           }}
         >
           Login
-        </Button>
+        </Button> */}
 
         {/* Register Button */}
-        <Button
+        {/* <Button
           color="inherit"
           component={Link}
           to="/register"
@@ -93,9 +92,10 @@ const NavBar = () => {
           }}
         >
           Register
-        </Button>
+        </Button> */}
 
         {/* Upload File Button */}
+        {isLoggedIn &&
         <Button
           color="inherit"
           component={Link}
@@ -113,7 +113,7 @@ const NavBar = () => {
         >
           Upload File
         </Button>
-
+}
         {/* Previous Challenges Button */}
         <Button
           color="inherit"
@@ -138,3 +138,6 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+
+
