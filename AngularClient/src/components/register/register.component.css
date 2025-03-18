@@ -1,0 +1,30 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+  }
+  
+  .auth-card {
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+  }
+  
+  form.form-layout {
+    display: flex;
+    flex-direction: column; /* מסדר את השדות לאורך */
+    gap: 20px; /* ריווח בין השדות */
+  }
+  
+  mat-form-field {
+    width: 100%; /* כל שדה תופס את כל הרוחב */
+  }
+  
+  button {
+    align-self: center; /* ממקם את הכפתור במרכז */
+    width: 100%; /* הכפתור תופס את כל הרוחב */
+  }

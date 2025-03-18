@@ -1,0 +1,100 @@
+<!-- 
+<div class="auth-container">
+    <mat-card class="auth-card">
+      <h2>Register</h2>
+      <form [formGroup]="signUpForm" (ngSubmit)="register()">
+  
+        <mat-form-field appearance="outline">
+            <mat-label>Id</mat-label>
+            <input matInput formControlName="id" required>
+            @if(signUpForm.get('id')?.invalid && signUpForm.get('id')?.touched){
+            <mat-error>
+              Error: id is required
+            </mat-error>
+            }
+          </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required>
+          @if(signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched){
+          <mat-error>
+            Error: name is required
+          </mat-error>
+          }
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required>
+          
+          @if(signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched){
+  
+          <mat-error>
+            Error: Not valid Email
+          </mat-error>
+          }
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required>
+          @if(signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched){
+          <mat-error>
+            Error: password is required
+          </mat-error>
+          }
+        </mat-form-field>
+  
+       
+  
+        <button mat-raised-button color="primary" type="submit">Send</button>
+      </form>
+    </mat-card>
+  </div> -->
+
+
+
+
+
+  <div class="auth-container">
+    <mat-card class="auth-card">
+      <h2>Register</h2>
+      <form [formGroup]="signUpForm" (ngSubmit)="register()" class="form-layout">
+        <mat-form-field appearance="outline">
+          <mat-label>Id</mat-label>
+          <input matInput formControlName="id" required>
+          <mat-error *ngIf="signUpForm.get('id')?.invalid && signUpForm.get('id')?.touched">
+            Error: Id is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required>
+          <mat-error *ngIf="signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched">
+            Error: Name is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required>
+          <mat-error *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+            Error: Not a valid Email
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required>
+          <mat-error *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
+            Error: Password is required
+          </mat-error>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" type="submit">Send</button>
+      </form>
+    </mat-card>
+  </div>

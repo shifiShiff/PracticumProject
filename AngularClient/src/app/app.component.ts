@@ -1,12 +1,27 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterModule,RouterLink,RouterLinkActive,RouterOutlet,MatToolbarModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'AngularClient';
+
+  isLoggedIn = false;
+
+  constructor(private authService: AuthService) {
+    this.authService.token$.subscribe(token => {
+      this.isLoggedIn = token !== null;
+    });
+
+  // get isLoggedIn(): boolean {
+  //   return localStorage.getItem('token') !== null;
+  }
+  
 }
