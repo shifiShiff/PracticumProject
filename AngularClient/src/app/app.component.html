@@ -2,11 +2,10 @@
 
 <mat-toolbar color="primary" class="nav-container">
   <nav class="nav-links">
-    <!-- <a mat-button routerLink="/auth" routerLinkActive="active">👆 login </a> -->
+
+    @if(isLoggedIn==null){
     <a mat-button routerLink="/login" routerLinkActive="active">👆 login </a>
-    <!-- @if(isLoggedIn){ -->
-    <a  mat-button routerLink="/register" routerLinkActive="active">👆 Add Admin </a>
-    <!-- } -->
+    }
   </nav>
 </mat-toolbar>
 

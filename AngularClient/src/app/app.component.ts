@@ -13,15 +13,15 @@ import { AuthService } from '../services/auth.service';
 export class AppComponent {
   title = 'AngularClient';
 
-  isLoggedIn = false;
+  isLoggedIn = localStorage.getItem('token');
 
-  constructor(private authService: AuthService) {
-    this.authService.token$.subscribe(token => {
-      this.isLoggedIn = token !== null;
-    });
+  // constructor(private authService: AuthService) {
+  //   this.authService.token$.subscribe(token => {
+  //     this.isLoggedIn = token !== null;
+  //   });
 
   // get isLoggedIn(): boolean {
   //   return localStorage.getItem('token') !== null;
-  }
+  // }
   
 }

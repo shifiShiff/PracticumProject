@@ -1,0 +1,40 @@
+<div class="challenge-list-container">
+    <h2 class="title">רשימת אתגרים</h2>
+    @for(challenge of challenges; track challenge.id){
+    <div class="challenge-card"></div>
+      <mat-card>
+        <mat-card-header>
+          <!-- <mat-card-title>{{ challenge.name }}</mat-card-title> -->
+          <!-- <mat-card-subtitle>מזהה אתגר: {{ challenge.id }}</mat-card-subtitle> -->
+          <mat-card-subtitle>Challenge: {{ challenge.title }}</mat-card-subtitle>
+          <mat-card-subtitle>{{challenge.description}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong> Winner details:</strong></p>
+          @if(challenge.winnerDetails){
+          <p >
+            
+
+            Name: {{ challenge.winnerDetails.name }}<br>
+            Email: {{ challenge.winnerDetails.email }}
+
+          </p>
+        }@else
+        {<mat-progress-spinner diameter="20" mode="indeterminate"></mat-progress-spinner>
+        <span>No Winner already</span>
+          
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="closeChallenge(challenge.id)">
+            finish challenge
+          </button>
+        </mat-card-actions>
+            }
+        </mat-card-content>
+
+    
+      </mat-card>
+    
+    }
+    </div>
+
+

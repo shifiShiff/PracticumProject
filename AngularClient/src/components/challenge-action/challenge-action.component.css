@@ -1,0 +1,55 @@
+.challenge-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #3f51b5;
+  }
+  
+  .challenge-card {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+  
+  mat-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+  
+  mat-card-header {
+    background-color: #e3f2fd;
+    border-bottom: 1px solid #90caf9;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  mat-card-title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  mat-card-subtitle {
+    font-size: 14px;
+    color: #757575;
+  }
+  
+  mat-card-content p {
+    margin: 5px 0;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+  }
+  
+  button {
+    font-size: 14px;
+  }
