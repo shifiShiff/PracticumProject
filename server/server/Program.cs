@@ -28,6 +28,8 @@ builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IAuthReposetory,AuthReposetory>();
 builder.Services.AddScoped<IChallengeService,ChallengeService>();
 builder.Services.AddScoped<IChallengeReposetory, ChallengeReposetory>();
+builder.Services.AddScoped<IVoteService, VoteService>();
+builder.Services.AddScoped<IVoteReposetory, VoteReposetory>();
 
 builder.Services.AddDbContext<DataContext>();
 

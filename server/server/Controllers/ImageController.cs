@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Pictures.Core.DTOs;
 using Pictures.Core.Modals;
 using Pictures.Core.Service;
@@ -37,6 +38,8 @@ namespace Pictures.API.Controllers
 
         //שליפת כל התמונות
         [HttpGet]
+        [Authorize(Roles = "User")]
+
         public async Task<ActionResult<Image>> GetAllImagesAsync()
         {
             var ImageList = await _imageService.GetAllImagesAsync();
@@ -52,6 +55,8 @@ namespace Pictures.API.Controllers
 
         //שליפת רשימת תמונות לפי אתגר
         [HttpGet("{ChallengeId}")]
+        [Authorize(Roles = "User")]
+
         public async Task<ActionResult<Image>> GetImagesByChallenge(int ChallengeId)
         {
             var list= await _imageService.GetImagesByChallengeAsync(ChallengeId);

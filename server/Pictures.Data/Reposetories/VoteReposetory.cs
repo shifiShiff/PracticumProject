@@ -22,10 +22,10 @@ namespace Pictures.Data.Reposetories
             var existingVote = await _context.Votes
             .FirstOrDefaultAsync(v => v.UserId == vote.UserId && v.ImageId == vote.ImageId);
 
-            if (existingVote != null)
+            if (existingVote == null)
             {
                 _context.Votes.Add(vote);
-                _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 return true;
             }
             return false;

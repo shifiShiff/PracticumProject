@@ -42,6 +42,12 @@ namespace Pictures.Services
             return await _userReposetory.AddUserAsync(tmp);
             
         }
+
+        public async Task<User> AddAdminAsync(UserPost user)
+        {
+            var tmp = _mapper.Map<User>(user);
+            return await _userReposetory.AddAdminAsync(tmp);
+        }
         public async Task<User> GetUserByMail(string email)
         {
             return await _userReposetory.GetUserByMail(email);
@@ -80,5 +86,7 @@ namespace Pictures.Services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+      
     }
 }

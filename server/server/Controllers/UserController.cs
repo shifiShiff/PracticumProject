@@ -71,6 +71,22 @@ namespace Pictures.API.Controllers
 
         }
 
+
+
+        [HttpPost("register/Admin")]
+        public async Task<ActionResult<string>> PostAdminAsync([FromBody] UserPost user)
+        {
+            var tmpuser = await _userService.AddAdminAsync(user);
+            if (tmpuser != null)
+            {
+                var token = _userService.GenerateJwtToken(user.Email, "Admin");
+                return Ok(new { Token = token, userId = tmpuser.Id });
+            }
+
+            return BadRequest(false);
+
+        }
+
         //כניסה למשתמש מחובר
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginModel model)
