@@ -22,6 +22,11 @@ namespace Pictures.Services
             _mapper = mapper;
         }
 
+        public async Task<List<Challenge>> GetAllChallengesAsync()
+        {
+            return await _challengeReposetory.GetAllChallengesAsync();
+        }
+
         public Task<Challenge> GetChallengeById(int id)
         {
             return _challengeReposetory.GetChallengeById(id);
@@ -30,6 +35,16 @@ namespace Pictures.Services
         public async Task<int> GetCurrentChallengeAsync()
         {
             return await _challengeReposetory.GetCurrentChallengeAsync();
+        }
+
+        public async Task<User> GetUserDetailByChallengeAsync(int challengeId)
+        {
+            return await _challengeReposetory.GetUserDetailByChallengeAsync(challengeId);
+        }
+
+        public async Task<List<ChallengeVoteDto>> GetVotePerCahllengeAsync()
+        {
+            return await _challengeReposetory.GetVotePerCahllengeAsync();
         }
 
         public async Task<bool> PostAsync(ChallengePost challenge)

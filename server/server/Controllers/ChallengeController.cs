@@ -36,6 +36,25 @@ namespace Pictures.API.Controllers
             return await _challengeService.GetChallengeById(id);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<ChallengeVoteDto>>> GetVotePerCahllengeAsync()
+        {
+            return await _challengeService.GetVotePerCahllengeAsync();
+        }
+
+        [HttpGet("allChallenges")]
+        public async Task<ActionResult<List<Challenge>>> GetAllChallengesAsync()
+        {
+            return await _challengeService.GetAllChallengesAsync();
+        }
+
+
+        [HttpGet("{challengeId}/winner")]
+        public async Task<ActionResult<User>> GetUserDetailByChallengeAsync(int challengeId)
+        {
+            return await _challengeService.GetUserDetailByChallengeAsync(challengeId);
+        }
+
         //POST api/<ChallengeController>
         [HttpPost]
         public async Task<ActionResult<bool>> PostAsync([FromBody] ChallengePost challenge)

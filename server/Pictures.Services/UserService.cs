@@ -43,11 +43,11 @@ namespace Pictures.Services
             
         }
 
-        public async Task<User> AddAdminAsync(UserPost user)
-        {
-            var tmp = _mapper.Map<User>(user);
-            return await _userReposetory.AddAdminAsync(tmp);
-        }
+        //public async Task<User> AddAdminAsync(UserPost user)
+        //{
+        //    var tmp = _mapper.Map<User>(user);
+        //    return await _userReposetory.AddAdminAsync(tmp);
+        //}
         public async Task<User> GetUserByMail(string email)
         {
             return await _userReposetory.GetUserByMail(email);
@@ -64,7 +64,7 @@ namespace Pictures.Services
             return await _userReposetory.DeleteUserAsync(id);
         }
 
-        public string GenerateJwtToken(string username, string role)
+        public string GenerateJwtToken(int id,string username, string role)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -72,7 +72,10 @@ namespace Pictures.Services
             var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, username),
-            new Claim(ClaimTypes.Role, role) // הוספת התפקיד היחיד כ-Claim
+            new Claim(ClaimTypes.Role, role) ,
+            new Claim("userId", id.ToString()) // הוספת ID עם שם מותאם
+
+            //new Claim(ClaimTypes.NameIdentifier, id.ToString()) // הוספת ה-ID כ-Claim
 
         };
 

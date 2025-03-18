@@ -50,24 +50,24 @@ namespace Pictures.Data.Reposetories
             return user;
         }
 
-        public async Task<User> AddAdminAsync(User user)
-        {
+        //public async Task<User> AddAdminAsync(User user)
+        //{
 
-            var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
-            if (existingUser != null)
-            {
-                return null; // המשתמש כבר קיים
-            }
-            var passwordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
-            user.PasswordHash = passwordHash;
-            user.Role = "Admin";
+        //    var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+        //    if (existingUser != null)
+        //    {
+        //        return null; // המשתמש כבר קיים
+        //    }
+        //    var passwordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+        //    user.PasswordHash = passwordHash;
+        //    user.Role = "Admin";
 
 
-            _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+        //    _context.Users.AddAsync(user);
+        //    await _context.SaveChangesAsync();
 
-            return user;
-        }
+        //    return user;
+        //}
 
         public async Task<bool> UpdateUserAsync(string id, User user)
         {

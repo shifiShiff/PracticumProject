@@ -38,7 +38,7 @@ namespace Pictures.API.Controllers
 
         //שליפת כל התמונות
         [HttpGet]
-        [Authorize(Roles = "User")]
+        //[Authorize(Roles = "User")]
 
         public async Task<ActionResult<Image>> GetAllImagesAsync()
         {
@@ -55,8 +55,7 @@ namespace Pictures.API.Controllers
 
         //שליפת רשימת תמונות לפי אתגר
         [HttpGet("{ChallengeId}")]
-        [Authorize(Roles = "User")]
-
+        //[Authorize(Roles = "User")]
         public async Task<ActionResult<Image>> GetImagesByChallenge(int ChallengeId)
         {
             var list= await _imageService.GetImagesByChallengeAsync(ChallengeId);
