@@ -3,10 +3,11 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { DashboardComponent } from "../components/dashboard/dashboard.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterModule,RouterLink,RouterLinkActive,RouterOutlet,MatToolbarModule],
+  imports: [RouterModule, RouterLink, RouterLinkActive, RouterOutlet, MatToolbarModule, DashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

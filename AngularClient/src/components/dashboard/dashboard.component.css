@@ -1,0 +1,21 @@
+
+
+
+  .menu-container {
+    display: flex;
+    gap: 15px; /* ריווח בין הכפתורים */
+    justify-content: center;
+    padding: 10px;
+    background-color: #f090b2;
+    border-bottom: 1px solid #ddd; /* קו תחתון */
+    position: fixed;
+    width: 100vw;
+    z-index: 999;
+  }
+  
+  button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }

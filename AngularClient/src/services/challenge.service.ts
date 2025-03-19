@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,19 +29,20 @@ export class ChallengeService {
     
   }
 
-  closeChallenge(challengeId: number){
+  closeChallenge(challengeId: number): Observable<any> {
     console.log("In close challenge");
     
-    this.http.put(`${this.apiUrl}/${challengeId}`,{}).subscribe(res=>{
-      console.log("Challenge closed successfully:", res);
-    },
-    error => {
-      console.error("Error closing challenge:", error);
-    });
-    
-    console.log("In close challenge");  
-    
+    const result = this.http.put(`${this.apiUrl}/${challengeId}`, {});
+      console.log("Challenge closed successfully:", result);
+ 
+    return result;
+  }
 
+
+  AddCallenge(challenge: any): Observable<any> {
+    console.log("In add challenge");
+    
+    return this.http.post(`${this.apiUrl}`, {Title: challenge.title, Description: challenge.description});
   }
 
 }
