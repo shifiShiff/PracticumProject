@@ -135,7 +135,7 @@ const Login = () => {
     try {
     const response = await axios.post("http://localhost:5131/api/User/login", { Email: data?.email, Password: data?.password });
     localStorage.setItem("token", response.data.token);
-    localStorage.setItem("userId", response.data.userId);
+    // localStorage.setItem("userId", response.data.userId);
     userStore.login({ email: data.email, password: data.password });
     console.log("login successfully", response.data);
     navigate('/dashboard');

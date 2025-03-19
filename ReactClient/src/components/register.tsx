@@ -96,7 +96,7 @@ const Register: React.FC = () => {
       });
       localStorage.setItem("token", response.data.token);
       userStore.register({email: data.email, password: data.password});
-      localStorage.setItem("userId", response.data.userId);
+      // localStorage.setItem("userId", response.data.userId);
       console.log("register successfully", response.data);
       navigate('/dashboard');
       window.dispatchEvent(new Event("storage"));

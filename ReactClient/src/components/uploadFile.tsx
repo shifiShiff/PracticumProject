@@ -1,10 +1,10 @@
-// import axios from "axios";
 import { useState } from "react";
 import ImageStore from "../store/ImageStore";
 import { useNavigate } from 'react-router-dom';
 import LinearProgress from '@mui/material/LinearProgress';
-import '../App.css'; // ודא שה-CSS מיובא
+import '../App.css';
 import apiClient from "./interceptor";
+import { jwtDecode } from 'jwt-decode';
 
 const UploadFile = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -43,11 +43,16 @@ const UploadFile = () => {
       const challengeId = currentChallengeResponse.data;
       console.log(challengeId);
 
+const token = localStorage.getItem('token');
+if (!token) {
+  throw new Error("Token is null or undefined");
+}
+const decoded: any = jwtDecode(token); // פענוח ה-JWT
+const userId= decoded.userId;
 
-      const userId = localStorage.getItem('userId')
-      console.log(userId);
 
-      const response = await apiClient.post(`http://localhost:5131/api/Upload/upload-file/${userId}/${challengeId}`, formData
+      const response = await apiClient.post(`http://localhost:5131/api/Upload/upload-file/${userId}/${challengeId}`, formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
 
       );
 
