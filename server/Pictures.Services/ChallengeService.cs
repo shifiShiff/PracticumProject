@@ -50,6 +50,7 @@ namespace Pictures.Services
         public async Task<bool> PostAsync(ChallengePost challenge)
         {
             var tmp =_mapper.Map<Challenge>(challenge);
+            tmp.Active = true;
             return await _challengeReposetory.PostAsync(tmp);
         }
 

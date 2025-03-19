@@ -32,9 +32,9 @@ namespace Pictures.Data.Reposetories
         public async Task<int> GetCurrentChallengeAsync()
         {
             return await _context.Challenges
-                    .Where(c => c.Active)
+                    .Where(c => c.Active==true)
                     .Select(c => c.Id)
-                    .SingleAsync();
+                    .FirstOrDefaultAsync();
         }
 
         public async Task<User> GetUserDetailByChallengeAsync(int challengeId)
