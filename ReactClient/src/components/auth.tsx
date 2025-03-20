@@ -12,13 +12,35 @@ const Auth: React.FC = () => {
                 <Button
                     variant="contained"
                     color="primary"
+                    sx={{
+                        color: 'rgb(255, 0, 98)', 
+                        backgroundColor: 'rgb(255, 255, 255)',
+                        width: '200px',
+                        height: '100px',
+                        boxShadow: '0 2px 7px rgb(255, 0, 98)', 
+                        '&:hover': { 
+                            backgroundColor: 'rgb(255, 0, 98)', 
+                            color: 'rgb(255, 255, 255)'
+                        }
+                    }}
                     onClick={() => navigate('/login')}
                 >
                     Login
                 </Button>
                 <Button
-                    variant="outlined"
-                    color="secondary"
+                    variant="contained"
+                    color="primary"
+                    sx={{
+                        color: 'rgb(255, 0, 98)', 
+                        backgroundColor: 'rgb(255, 255, 255)',
+                        width: '200px',
+                        height: '100px',
+                        boxShadow: '0 2px 7px rgb(255, 0, 98)',
+                        '&:hover': { 
+                            backgroundColor: 'rgb(255, 0, 98)', 
+                            color: 'rgb(255, 255, 255)'
+                        }
+                    }}
                     onClick={() => navigate('/register')}
                 >
                     Register

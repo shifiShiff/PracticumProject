@@ -1,73 +1,3 @@
-// import axios from 'axios';
-// import React, { useState } from 'react';
-
-// const Register: React.FC = () => {
-//     const [id, setId] = useState('');
-//     const [name, setName] = useState('');
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-
-//     const handleSubmit = async (event: React.FormEvent) => {
-//         event.preventDefault();
-//         // Handle form submission logic here
-//         const response = await axios.post("http://localhost:5131/api/User/register",
-//         {UserId:id ,Name:name, Email:email, PasswordHash: password });
-//         localStorage.setItem("token", response.data.token);
-//         console.log("register successfully", response.data);
-//         console.log({ id, name, email, password });
-
-
-//     };
-
-//     return (
-//         <form onSubmit={handleSubmit}>
-//             <div>
-//                 <label htmlFor="id">ID:</label>
-//                 <input
-//                     type="text"
-//                     id="id"
-//                     value={id}
-//                     onChange={(e) => setId(e.target.value)}
-//                     required
-//                 />
-//             </div>
-//             <div>
-//                 <label htmlFor="name">Name:</label>
-//                 <input
-//                     type="text"
-//                     id="name"
-//                     value={name}
-//                     onChange={(e) => setName(e.target.value)}
-//                     required
-//                 />
-//             </div>
-//             <div>
-//                 <label htmlFor="email">Email:</label>
-//                 <input
-//                     type="email"
-//                     id="email"
-//                     value={email}
-//                     onChange={(e) => setEmail(e.target.value)}
-//                     required
-//                 />
-//             </div>
-//             <div>
-//                 <label htmlFor="password">Password:</label>
-//                 <input
-//                     type="password"
-//                     id="password"
-//                     value={password}
-//                     onChange={(e) => setPassword(e.target.value)}
-//                     required
-//                 />
-//             </div>
-//             <button type="submit">Register</button>
-//         </form>
-//     );
-// };
-
-// export default Register;
-
 
 
 import axios from 'axios';
@@ -118,7 +48,9 @@ const Register: React.FC = () => {
           padding: 3,
           backgroundColor: "#f5f5f5",
           borderRadius: 2,
-          boxShadow: 3,
+          marginTop:'100px',
+          boxShadow: '0 8px 10px rgb(255, 0, 98)'
+
         }}
       >
         <Typography variant="h5" gutterBottom>
@@ -223,8 +155,15 @@ const Register: React.FC = () => {
             variant="contained"
             color="primary"
             fullWidth
-            sx={{ marginTop: 2 }}
-          >
+            sx={{
+              marginTop: 2,
+              backgroundColor: 'rgb(255, 0, 98)', 
+              color: 'rgb(255, 255, 255)',
+              '&:hover': { 
+                color: 'rgb(255, 0, 98)', 
+                backgroundColor: 'rgb(255, 255, 255)'
+              }
+          }}          >
             Register
           </Button>
         </form>

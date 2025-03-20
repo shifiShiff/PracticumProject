@@ -36,7 +36,7 @@ const UploadFile = () => {
 
     setUploading(true);
     const formData = new FormData();
-    formData.append('file', file);  // מוסיף את הקובץ ל-formData
+    formData.append('file', file);  
 
     try {
       const currentChallengeResponse = await apiClient.get('http://localhost:5131/api/Challenge/current');
@@ -47,7 +47,7 @@ const token = localStorage.getItem('token');
 if (!token) {
   throw new Error("Token is null or undefined");
 }
-const decoded: any = jwtDecode(token); // פענוח ה-JWT
+const decoded: any = jwtDecode(token); 
 const userId= decoded.userId;
 
 
@@ -60,7 +60,6 @@ const userId= decoded.userId;
       setUploadSuccess(true);
       await ImageStore.getAllImages();
       setFinished(true);
-      // navigate('/dashboard/');
 
     } catch (error) {
       console.error("Error uploading file", error);
@@ -81,13 +80,14 @@ const userId= decoded.userId;
         onChange={handleFileChange}
         className="hidden-file-input"
         id="file-input"
+     
       />
       <label htmlFor="file-input" className="custom-file-upload">
         Choose File
       </label>
       {file && <p style={{ marginTop: '10px' }}>{file.name}</p>}
 
-      <button style={{ border: 'solid 1px black', width: 'auto', marginTop: '15px' }} onClick={handleUpload} disabled={uploading}>
+      <button style={{ boxShadow: '0 2px 7px rgb(255, 0, 98)',border: 'solid 1px rgb(255, 0, 98)', width: 'auto', marginTop: '15px' }} onClick={handleUpload} disabled={uploading}>
         {uploading ? <LinearProgress style={{ width: '100%' }} /> : "Upload Image"}
       </button>
 
@@ -95,7 +95,7 @@ const userId= decoded.userId;
       {uploadSuccess === false && <p>Upload failed. Try again.</p>}
 
 
-      {finished && <button style={{ border: 'solid 1px black', width: 'auto', marginTop: '15px' }} onClick={() => navigate('/dashboard/')}>Go to dashboard</button>}
+      {finished && <button style={{boxShadow: '0 2px 7px rgb(255, 0, 98)', border: 'solid 1px rgb(255, 0, 98)', width: 'auto', marginTop: '15px' }} onClick={() => navigate('/dashboard/')}>Go to dashboard</button>}
     </div>
   );
 };

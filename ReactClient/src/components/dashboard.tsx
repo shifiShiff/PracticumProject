@@ -12,7 +12,7 @@ const Dashboard = observer(() => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [challenge, setChallenge] = useState<{ id: number, title: string; description: string } | null>(null);
-  const isLoggedIn = !!localStorage.getItem('token'); // בדיקת טוקן
+  const isLoggedIn = !!localStorage.getItem('token'); 
 
   useEffect(() => {
     const fetchCurrentChallengeImages = async () => {
@@ -40,7 +40,7 @@ const Dashboard = observer(() => {
     if (!token) {
       throw new Error("Token is null or undefined");
     }
-    const decoded: any = jwtDecode(token); // פענוח ה-JWT
+    const decoded: any = jwtDecode(token); 
     return decoded.userId;
   }
 
@@ -60,13 +60,13 @@ const Dashboard = observer(() => {
   return (
     <Box
       sx={{
-        marginTop: '50px',
+        marginTop: '100px',
         width: '100%',
         height: 'auto',
         padding: '20px',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center', // מרכז את התוכן
+        alignItems: 'center', 
       }}
     >
       {challenge && (
@@ -77,10 +77,11 @@ const Dashboard = observer(() => {
             padding: '20px',
             border: '2px solid #333',
             borderRadius: '10px',
-            backgroundColor: '#f9f9f9',
-            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)', // יותר צל לכותרת
+            backgroundColor: 'rgb(255, 255, 255)',
+            boxShadow: '0 3px 6px rgb(255, 0, 98)', 
             maxWidth: '800px',
             width: '100%',
+            
           }}
         >
           <Typography
@@ -89,8 +90,8 @@ const Dashboard = observer(() => {
             sx={{
               color: '#333',
               fontWeight: 'bold',
-              // textTransform: 'uppercase', // אותיות גדולות
-              letterSpacing: '2px', // ריווח בין אותיות
+              letterSpacing: '1px', 
+              
             }}
           >
             {challenge.title}
@@ -98,7 +99,7 @@ const Dashboard = observer(() => {
           <Typography
             variant="h5"
             component="p"
-            sx={{ color: '#666', marginTop: '10px', fontStyle: 'italic', }}>
+            sx={{ color:'rgb(255, 0, 98)', marginTop: '10px', fontStyle: 'italic', }}>
             {challenge.description}
           </Typography>
         </Box>
@@ -107,7 +108,7 @@ const Dashboard = observer(() => {
       <Box
         sx={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '30px',
-          justifyContent: 'center', // מרכז את הכרטיסים
+          justifyContent: 'center', 
           width: '100%',
         }}>
         {images.map((image) => (
@@ -117,9 +118,9 @@ const Dashboard = observer(() => {
               maxWidth: 600,
               width: '600px',
               height: 'auto',
-              boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)', // יותר צל לכרטיסים
-              borderRadius: '15px', // פינות מעוגלות
-              overflow: 'hidden', // חיתוך תוכן חורג
+              boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)', 
+              borderRadius: '15px', 
+              overflow: 'hidden', 
               marginRight: '0px'
             }}
           >
@@ -128,8 +129,8 @@ const Dashboard = observer(() => {
               image={image.imageUrl}
               alt={image.imageName}
               sx={{
-                height: '400px', // גובה התמונה
-                objectFit: 'cover', // חיתוך התמונה
+                height: '400px', 
+                objectFit: 'cover', 
               }}
             />
             <CardContent>
@@ -146,12 +147,12 @@ const Dashboard = observer(() => {
               </Typography>
               <Typography
                 variant="h4"
-                color="text.primary"
+                color="primary"
                 sx={{
                   textAlign: 'center',
                   marginBottom: '20px',
                   fontWeight: 'bold',
-                  color: '#1976d2',
+                  color: 'rgb(255, 0, 98)',
                 }}
               >
                 Votes: {image.votes}
@@ -164,10 +165,14 @@ const Dashboard = observer(() => {
                   sx={{
                     display: 'block',
                     margin: '0 auto',
-                    backgroundColor: '#1976d2',
-                    color: '#fff',
+                    color: 'rgb(255, 0, 98)',
+                    backgroundColor: 'rgb(251, 248, 249)',
+                    border: '1px solid rgb(0, 0, 0)',
+
                     '&:hover': {
-                      backgroundColor: '#1565c0',
+                      backgroundColor: 'rgb(251, 248, 249)',
+                      border: '1px solid rgb(255, 0, 98)',
+
                     },
                     padding: '15px',
                     borderRadius: '50%',

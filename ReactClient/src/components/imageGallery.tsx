@@ -83,7 +83,7 @@ return (
     {Object.keys(groupedImages).map((challengeIdStr) => {
       const challengeId = Number(challengeIdStr);
       if (challengeId === currentChallengeId) {
-        return null; // דלג על האתגר הנוכחי
+        return null; 
       }
       const challenge = challenges[challengeId];
       const maxVotesImage = getMaxVotesImage(groupedImages[challengeId]);
@@ -99,8 +99,7 @@ return (
               variant="h5"
               sx={{
                 fontWeight: 'bold',
-                // textTransform: 'uppercase',
-                color: '#333',
+                color:'rgb(255, 0, 98)'
               }}
             >
               {challenge ? `${challenge.title}  ${challenge?.description}` : `Challenge ID: ${challengeId}`}
@@ -125,7 +124,7 @@ return (
                   marginBottom: '20px',
                   boxShadow:
                     image.id === maxVotesImage.id
-                      ? '0 10px 20px rgba(255, 215, 0, 0.5)' // צל נוסף למנצח
+                      ? '0 10px 20px rgb(255, 0, 98)' 
                       : '0 4px 8px rgba(0, 0, 0, 0.1)',
                   borderRadius: '10px',
                   overflow: 'hidden',
@@ -141,7 +140,8 @@ return (
                       top: 0,
                       left: 0,
                       width: '100%',
-                      backgroundColor: 'rgba(255, 215, 0, 0.9)',
+                      backgroundColor: 'rgb(255, 0, 98)',
+                      opacity: 0.7,
                       color: '#fff',
                       textAlign: 'center',
                       padding: '5px 0',
@@ -183,7 +183,7 @@ return (
                     variant="h6"
                     sx={{
                       fontWeight: 'bold',
-                      color: '#1976d2',
+                      color: 'rgb(255, 0, 98)',
                     }}
                   >
                     Votes: {image.votes}
