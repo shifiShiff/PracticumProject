@@ -8,8 +8,15 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
- 
-  constructor(private http:HttpClient, private router:Router) { }
+  private isLoggedInSubject = new BehaviorSubject<boolean>(false); // ניהול מצב התחברות
+  isLoggedIn$ = this.isLoggedInSubject.asObservable(); // Observable למעקב אחר המצב
+
+  constructor(private http:HttpClient, private router:Router) {
+    // בדיקה אם יש טוקן ב-localStorage בעת טעינת האפליקציה
+    const token = localStorage.getItem('authToken');
+    this.isLoggedInSubject.next(!!token);
+  }
+  // constructor(private http:HttpClient, private router:Router) { }
 
 
 
@@ -19,6 +26,8 @@ export class AuthService {
           next:(res:any)=>{
 
           localStorage.setItem('token', res.token);
+          this.isLoggedInSubject.next(true);
+
           this.router.navigate(['/dashboard'])
           console.log('Logged in successfully!');
 

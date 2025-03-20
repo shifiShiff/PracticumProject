@@ -2,8 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
+
+    padding: 100px;
+    margin-top: 80px;
   }
 
 
@@ -11,21 +12,4 @@
     text-align: center;
     font-size: 18px;
     color: #666;
-  }
-
-  .apexcharts-canvas {
-    touch-action: none; /* מונע את ברירת המחדל של גלילה */
- 
-    overflow: hidden !important;
-  }
-  .apexcharts-toolbar button {
-    transition: background-color 0.3s ease;
-  }
-  
-  .apexcharts-toolbar button:hover {
-    background-color: #f0f0f0 !important; /* צבע רקע בעת ריחוף */
-  }
-  
-  .apexcharts-toolbar button:active {
-    background-color: #d0d0d0 !important; /* צבע רקע בעת לחיצה */
   }

@@ -1,11 +1,9 @@
 <div class="challenge-list-container">
-    <h2 class="title">רשימת אתגרים</h2>
+    <h2 class="title">Challenge list</h2>
     @for(challenge of challenges; track challenge.id){
     <div class="challenge-card"></div>
     <mat-card>
         <mat-card-header>
-            <!-- <mat-card-title>{{ challenge.name }}</mat-card-title> -->
-            <!-- <mat-card-subtitle>מזהה אתגר: {{ challenge.id }}</mat-card-subtitle> -->
             <mat-card-subtitle>Challenge: {{ challenge.title }}</mat-card-subtitle>
             <mat-card-subtitle>{{challenge.description}}</mat-card-subtitle>
         </mat-card-header>
@@ -24,7 +22,7 @@
             <span>No Winner already</span>
 
             <mat-card-actions>
-                <button mat-raised-button color="primary" (click)="closeChallenge(challenge.id)">
+                <button mat-raised-button  class="add-challenge-button" (click)="closeChallenge(challenge.id)">
                     finish challenge
                 </button>
             </mat-card-actions>

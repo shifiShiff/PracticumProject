@@ -1,27 +1,18 @@
 
-<!-- <app-votegraph></app-votegraph> -->
- <!-- <app-challenge-action></app-challenge-action> -->
-
-
-
- <!-- <div class="dashboard-container">
-    <h1 class="dashboard-title">אפליקציית מנהל</h1>
-    <div class="menu-container">
-      <button mat-raised-button color="primary" (click)="navigateTo('reports')">
-        דווח
-      </button>
-      <button mat-raised-button color="accent" (click)="navigateTo('challenges')">
-        רשימת אתגרים
-      </button>
-    </div>
-  </div> -->
-
-
   <div class="menu-container">
-    <button mat-raised-button color="primary" (click)="navigateTo('reports')">
-      דווח
+
+    <img src="assets/logo.png" alt="Logo" style="height: 100px;">
+    
+    <button  mat-raised-button color="primary" class="btn" (click)="navigateTo('reports')">
+      Reports
     </button>
-    <button mat-raised-button color="accent" (click)="navigateTo('challenges')">
-      רשימת אתגרים
+    <button  mat-raised-button color="accent" class="btn" (click)="navigateTo('challenges')">
+      Challenge List
     </button>
   </div>
+
+
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+

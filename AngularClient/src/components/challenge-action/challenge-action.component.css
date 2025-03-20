@@ -3,28 +3,29 @@
 
   .challenge-list-container {
     display: flex;
-    flex-wrap: wrap; /* מאפשר שבירת שורות */
-    gap: 15px; /* ריווח בין הכרטיסים */
-    justify-content: center; /* מרכז את הכרטיסים */
+    flex-wrap: wrap; 
+    gap: 15px; 
+    justify-content: center; 
     padding: 20px;
     background-color: #f5f5f5;
+    margin-top: 120px;
   }
   
   
   mat-card {
-    width: 100%; /* הכרטיס יתפוס את כל הרוחב של הקונטיינר */
-    height: 100%; /* הכרטיס יתפוס את כל הגובה של הקונטיינר */
+    width: 100%; 
+    height: 100%; 
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* מפזר את התוכן בתוך הכרטיס */
+    justify-content: space-between; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
 
   }
   
   mat-card-header {
-    background-color: #e3f2fd;
-    border-bottom: 1px solid #90caf9;
+    background-color: rgb(255, 0, 98);
+    border-bottom: 1px solid rgb(0, 0, 0);
     border-radius: 8px 8px 0 0;
   }
   
@@ -35,19 +36,19 @@
   
   mat-card-subtitle {
     font-size: 14px;
-    color: #757575;
+    color: #030303;
   }
   
   mat-card-content {
-    flex-grow: 1; /* גורם לתוכן המרכזי להתפרס */
+    flex-grow: 1; 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* מרכז את התוכן */
+    justify-content: center;
     align-items: center;
   }
   
   mat-card-actions {
-    margin-top: auto; /* דוחף את הכפתורים לתחתית הכרטיס */
+    margin-top: auto; 
     display: flex;
     justify-content: flex-end;
     padding: 16px;
@@ -59,16 +60,17 @@
 
 
   .add-challenge-button {
-    font-size: 18px; /* גודל גופן גדול יותר */
-    padding: 15px 30px; /* ריווח פנימי רחב */
-    background-color:  #90caf9;; /* צבע רקע בולט */
-    color: rgb(0, 0, 0); /* צבע טקסט */
-    border-radius: 8px; /* פינות מעוגלות */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* צל לכפתור */
+    font-size: 18px; 
+    padding: 15px 30px; 
+    background-color:  rgb(255, 0, 98); 
+    color: rgb(0, 0, 0); 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
   }
   
    .add-challenge-button:hover {
-    background-color: #f090b2; 
+    background-color: #fe025a; 
+    color: white;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
    }
   

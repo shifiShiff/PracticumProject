@@ -1,6 +1,6 @@
 
 .ng-pristine{
-    padding-top: 15px;
+    padding-top: 20px;
 
 }
 
@@ -8,6 +8,6 @@ mat-dialog-actions button {
     font-size: 16px; 
     padding: 10px 20px; 
     border-radius: 8px; 
-    color: rgb(247, 60, 147);
+    color: rgb(255, 0, 98);
     font-weight: bold; 
   }
