@@ -15,7 +15,7 @@ namespace Pictures.Core.Service
         Task<bool> PostAsync(ChallengePost challenge);
         Task<string> UpdateActiveAsync(int id);
         Task<Challenge> GetChallengeById(int id);
-        Task<List<ChallengeVoteDto>> GetVotePerCahllengeAsync();
+        Task<List<ChallengeVote>> GetVotePerCahllengeAsync();
         Task<List<Challenge>> GetAllChallengesAsync();
         Task<User> GetUserDetailByChallengeAsync(int challengeId);
 

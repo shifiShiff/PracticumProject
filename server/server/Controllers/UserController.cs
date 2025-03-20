@@ -29,9 +29,10 @@ namespace Pictures.API.Controllers
             return Ok(userList);
         }
 
+
         // שליפת נתוני משתמש ע"פ ID 
         [HttpGet("{id}")]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> GetUserByIdAsync(string id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -45,7 +46,7 @@ namespace Pictures.API.Controllers
 
         // שליפת כתובת מייל של משתמש ע"פ ID 
         [HttpGet("userEmail/{id}")]
-        [Authorize(Roles = "User")] 
+        [Authorize(Roles = "Admin")] 
         public async Task<ActionResult<string>> GetUserEmailByIdAsync(string id)
         {
             var user =await _userService.GetUserByIdAsync(id);
@@ -55,6 +56,7 @@ namespace Pictures.API.Controllers
             }
             return Ok(user.Email);
         }
+
 
         // הוספת משתמש חדש
         [HttpPost("register")]
@@ -72,21 +74,6 @@ namespace Pictures.API.Controllers
         }
 
 
-
-        //[HttpPost("register/Admin")]
-        //public async Task<ActionResult<string>> PostAdminAsync([FromBody] UserPost user)
-        //{
-        //    var tmpuser = await _userService.AddAdminAsync(user);
-        //    if (tmpuser != null)
-        //    {
-        //        var token = _userService.GenerateJwtToken(user.UserId, user.Email, "Admin");
-        //        return Ok(new { Token = token, userId = tmpuser.Id });
-        //    }
-
-        //    return BadRequest(false);
-
-        //}
-
         //כניסה למשתמש מחובר
         [HttpPost("login")]
         public async Task<ActionResult> Login([FromBody] LoginModel model)
@@ -101,13 +88,13 @@ namespace Pictures.API.Controllers
         }
 
 
+        //כניסה למנהל
         [HttpPost("login/admin")]
         public async Task<ActionResult> LoginAdmin([FromBody] LoginModel model)
         {
             var user = await _userService.GetUserByMail(model.Email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.PasswordHash) ||user.Role!="Admin")
                 return Unauthorized();
-
 
             var token = _userService.GenerateJwtToken(user.Id, user.Email, user.Role);
             return Ok(new { Token = token, userId = user.Id });
@@ -116,6 +103,7 @@ namespace Pictures.API.Controllers
 
         // עדכון משתמש
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<bool>> PutAsync(string id, [FromBody] UserPost user)
         {
             if (await _userService.UpdateUserAsync(id, user))
@@ -128,6 +116,7 @@ namespace Pictures.API.Controllers
 
         // מחיקת משתמש
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<bool>> DeleteUserAsync(string id)
         {
             if(await _userService.DeleteUserAsync(id))

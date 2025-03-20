@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Pictures.Core.DTOs
 {
-    public class ChallengeVoteDto
+    public class ChallengeVote
     {
         public int ChallengeId { get; set; }
         public string ChallengeTitle { get; set; }

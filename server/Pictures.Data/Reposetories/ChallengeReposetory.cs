@@ -48,19 +48,18 @@ namespace Pictures.Data.Reposetories
                 return null;
             }
 
-            // שליפת פרטי המשתמש מתוך טבלת המשתמשים
             var user = await _context.Users
                                       .Where(u => u.Id == userId)
                                       .FirstOrDefaultAsync();
             return user;
         }
 
-        public async Task<List<ChallengeVoteDto>> GetVotePerCahllengeAsync()
+        public async Task<List<ChallengeVote>> GetVotePerCahllengeAsync()
         {
             var votesPerChallenge = await (from vote in _context.Votes
                                            join challenge in _context.Challenges on vote.ChallengeId equals challenge.Id
                                            group vote by new { vote.ChallengeId, challenge.Title } into g
-                                           select new ChallengeVoteDto
+                                           select new ChallengeVote
                                            {
                                                ChallengeId = g.Key.ChallengeId,
                                                ChallengeTitle = g.Key.Title,
@@ -95,12 +94,9 @@ namespace Pictures.Data.Reposetories
             .Select(g => g.ImageId)
             .FirstOrDefaultAsync();
 
-            if (topImage != null)
+            if (topImage != 0)
             {
 
-
-                //{
-                // שליפת ה-UserId של מי שהעלה את התמונה
                 var image = await _context.Images
                     .Where(i => i.Id == topImage)
                     .Select(i => new { i.Id, i.UserId })
@@ -109,19 +105,13 @@ namespace Pictures.Data.Reposetories
                 Console.WriteLine("image " + image);
                 if (image != null)
                 {
-                    challenge.WinnerImageId = image.Id; // עדכון בטבלת האתגרים
+                    challenge.WinnerImageId = image.Id; 
                     challenge.WinnerId = image.UserId;
-
-                    //Console.WriteLine(image.Id);
-                    //Console.WriteLine(image.UserId);
                 }
-                //}
-
-
+ 
                 challenge.Active = false;
-
                 await _context.SaveChangesAsync();
-                //var mail = await _context.Users.FirstOrDefaultAsync(u => u.Id == image.UserId);
+
                 var winnerEmail = await _context.Users
                 .Where(u => u.Id == image.UserId)
                 .Select(u => u.Email)

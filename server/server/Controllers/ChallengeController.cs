@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Pictures.Core.DTOs;
 using Pictures.Core.Modals;
 using Pictures.Core.Service;
@@ -28,18 +29,23 @@ namespace Pictures.API.Controllers
             return BadRequest(false);
         }
 
-        //GET api/<ChallengeController>/5
+
+        //שליפת פרטי אתגר ע"י ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Challenge>> GetChallengeById(int id)
         {
             return await _challengeService.GetChallengeById(id);
         }
 
+
+        //קבלת רשימת אתגרים עם כמות הצבעות לכל אתגר
         [HttpGet]
-        public async Task<ActionResult<List<ChallengeVoteDto>>> GetVotePerCahllengeAsync()
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<List<ChallengeVote>>> GetVotePerCahllengeAsync()
         {
             return await _challengeService.GetVotePerCahllengeAsync();
         }
+
 
         [HttpGet("allChallenges")]
         public async Task<ActionResult<List<Challenge>>> GetAllChallengesAsync()
@@ -48,20 +54,23 @@ namespace Pictures.API.Controllers
         }
 
 
+        //קבלת פרטי מנצח של אתגר ע"י CHALLEGEID
         [HttpGet("{challengeId}/winner")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<User>> GetUserDetailByChallengeAsync(int challengeId)
         {
             return await _challengeService.GetUserDetailByChallengeAsync(challengeId);
         }
 
-        //POST api/<ChallengeController>
+        //הוספת אתגר
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<bool>> PostAsync([FromBody] ChallengePost challenge)
         {
             return await _challengeService.PostAsync(challenge);
         }
 
-        // PUT api/<ChallengeController>/5
+        //סגירת אתגר ושליחת מייל לזוכה המאושר
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> Put(int id)
         {

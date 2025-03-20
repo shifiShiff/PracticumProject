@@ -43,11 +43,6 @@ namespace Pictures.Services
             
         }
 
-        //public async Task<User> AddAdminAsync(UserPost user)
-        //{
-        //    var tmp = _mapper.Map<User>(user);
-        //    return await _userReposetory.AddAdminAsync(tmp);
-        //}
         public async Task<User> GetUserByMail(string email)
         {
             return await _userReposetory.GetUserByMail(email);
@@ -73,10 +68,7 @@ namespace Pictures.Services
         {
             new Claim(ClaimTypes.Name, username),
             new Claim(ClaimTypes.Role, role) ,
-            new Claim("userId", id.ToString()) // הוספת ID עם שם מותאם
-
-            //new Claim(ClaimTypes.NameIdentifier, id.ToString()) // הוספת ה-ID כ-Claim
-
+            new Claim("userId", id.ToString()) 
         };
 
             var token = new JwtSecurityToken(

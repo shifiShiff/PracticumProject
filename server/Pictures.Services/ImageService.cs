@@ -45,7 +45,6 @@ namespace Pictures.Services
         }
         public async Task<bool> AddImageAsync(Image image)
         {
-            //var tmp= _mapper.Map<Image>(image);
             return await _imageReposetory.AddImageAsync(image);
         }
 

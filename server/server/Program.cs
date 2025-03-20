@@ -13,10 +13,8 @@ using Amazon.S3;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,8 +22,6 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IImageReposetory, ImageReposetory>();
 builder.Services.AddScoped<IUserReposetory, UserReposeroty>();
-builder.Services.AddScoped<IAuthService,AuthService>();
-builder.Services.AddScoped<IAuthReposetory,AuthReposetory>();
 builder.Services.AddScoped<IChallengeService,ChallengeService>();
 builder.Services.AddScoped<IChallengeReposetory, ChallengeReposetory>();
 builder.Services.AddScoped<IVoteService, VoteService>();
@@ -117,7 +113,7 @@ var app = builder.Build();
 
 
 
-app.UseCors("AllowAll"); // חייב להיות לפני app.UseAuthorization()
+app.UseCors("AllowAll"); 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -128,7 +124,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); // ?? קודם Authentication
+app.UseAuthentication(); 
 
 app.UseAuthorization();
 

@@ -48,7 +48,7 @@ namespace Pictures.Services
             return await _challengeReposetory.GetUserDetailByChallengeAsync(challengeId);
         }
 
-        public async Task<List<ChallengeVoteDto>> GetVotePerCahllengeAsync()
+        public async Task<List<ChallengeVote>> GetVotePerCahllengeAsync()
         {
             return await _challengeReposetory.GetVotePerCahllengeAsync();
         }
@@ -73,13 +73,7 @@ namespace Pictures.Services
             email.Subject = subject;
             email.Body = new TextPart("plain") { Text = body };
 
-            //using var smtp = new SmtpClient();
-            //await smtp.ConnectAsync(_config["EmailSettings:SmtpServer"], int.Parse(_config["EmailSettings:Port"]), SecureSocketOptions.StartTls);
-            //await smtp.AuthenticateAsync(_config["EmailSettings:Username"], _config["EmailSettings:Password"]);
-            //await smtp.SendAsync(email);
-            //await smtp.DisconnectAsync(true);
-
-            using var smtp = new MailKit.Net.Smtp.SmtpClient(); // לוודא שזה מ-MailKit
+            using var smtp = new MailKit.Net.Smtp.SmtpClient(); 
             await smtp.ConnectAsync(_config["EmailSettings:SmtpServer"], int.Parse(_config["EmailSettings:Port"]), SecureSocketOptions.StartTls);
             await smtp.AuthenticateAsync(_config["EmailSettings:Username"], _config["EmailSettings:Password"]);
             await smtp.SendAsync(email);

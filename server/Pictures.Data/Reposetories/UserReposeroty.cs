@@ -37,7 +37,7 @@ namespace Pictures.Data.Reposetories
             var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
             if (existingUser != null)
             {
-                return null; // המשתמש כבר קיים
+                return null;
             }
             var passwordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
             user.PasswordHash = passwordHash;
@@ -49,25 +49,6 @@ namespace Pictures.Data.Reposetories
 
             return user;
         }
-
-        //public async Task<User> AddAdminAsync(User user)
-        //{
-
-        //    var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
-        //    if (existingUser != null)
-        //    {
-        //        return null; // המשתמש כבר קיים
-        //    }
-        //    var passwordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
-        //    user.PasswordHash = passwordHash;
-        //    user.Role = "Admin";
-
-
-        //    _context.Users.AddAsync(user);
-        //    await _context.SaveChangesAsync();
-
-        //    return user;
-        //}
 
         public async Task<bool> UpdateUserAsync(string id, User user)
         {
@@ -86,16 +67,12 @@ namespace Pictures.Data.Reposetories
 
         public async Task<bool> DeleteUserAsync(string id)
         {
-            //var user = await GetUserByIdAsync(id);
             var user = await _context.Users.FirstOrDefaultAsync(user => user.UserId == id);
-            //if (user != null)
-            //{
+            
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
                 Console.WriteLine("deleted");
                 return true;
-            //}
-            //return false;
         }
 
        
