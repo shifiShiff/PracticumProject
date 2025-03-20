@@ -25,6 +25,7 @@ const Login = () => {
     window.dispatchEvent(new Event("storage"));
       } catch (error) {
         console.error("login failed", error);
+        alert("Error: No such user")
       }
   };
 
@@ -39,7 +40,6 @@ const Login = () => {
           padding: 3,
           backgroundColor: "rgb(252, 252, 252)",
           borderRadius: 2,
-          // boxShadow: 3 
           boxShadow: '0 8px 10px rgb(255, 0, 98)'
           
         }}
@@ -49,7 +49,7 @@ const Login = () => {
         </Typography>
 
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
-          {/* Email field with validation */}
+
           <Controller
             name="email"
             control={control}
@@ -75,7 +75,6 @@ const Login = () => {
             )}
           />
 
-          {/* Password field with validation */}
           <Controller
             name="password"
             control={control}

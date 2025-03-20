@@ -85,17 +85,17 @@ const userId= decoded.userId;
       <label htmlFor="file-input" className="custom-file-upload">
         Choose File
       </label>
-      {file && <p style={{ marginTop: '10px' }}>{file.name}</p>}
+      {file && finished===false && <p style={{ marginTop: '10px' }}>{file.name}</p>}
 
       <button style={{ boxShadow: '0 2px 7px rgb(255, 0, 98)',border: 'solid 1px rgb(255, 0, 98)', width: 'auto', marginTop: '15px' }} onClick={handleUpload} disabled={uploading}>
         {uploading ? <LinearProgress style={{ width: '100%' }} /> : "Upload Image"}
       </button>
 
-      {uploadSuccess === true && <p>File uploaded successfully!</p>}
+      {uploadSuccess === true  && <p>File uploaded successfully!</p>}
       {uploadSuccess === false && <p>Upload failed. Try again.</p>}
 
 
-      {finished && <button style={{boxShadow: '0 2px 7px rgb(255, 0, 98)', border: 'solid 1px rgb(255, 0, 98)', width: 'auto', marginTop: '15px' }} onClick={() => navigate('/dashboard/')}>Go to dashboard</button>}
+      {finished && <button style={{boxShadow: '0 2px 7px rgb(255, 0, 98)', border: 'solid 1px rgb(255, 0, 98)', width: 'auto', marginTop: '15px' }} onClick={() => navigate('/dashboard/')}>Go back to home page</button>}
     </div>
   );
 };
