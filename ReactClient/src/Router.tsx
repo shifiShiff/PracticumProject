@@ -17,7 +17,7 @@ export const myRouter = createBrowserRouter([
         errorElement: <>main error</>,
         children: [ 
             {
-                index: true, // נתיב ברירת מחדל
+                index: true,
                 element: <Dashboard />
             },          
             {
