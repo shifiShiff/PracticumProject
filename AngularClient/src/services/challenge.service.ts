@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,17 +25,20 @@ export class ChallengeService {
     const details= this.http.get<any>(`${this.apiUrl}/${challengeId}/winner`);
     console.log("In get winner"+details);
     return details;
-    
-    
+     
   }
 
   closeChallenge(challengeId: number): Observable<any> {
     console.log("In close challenge");
-    
-    const result = this.http.put(`${this.apiUrl}/${challengeId}`, {});
-      console.log("Challenge closed successfully:", result);
- 
-    return result;
+   
+    return this.http.put(`${this.apiUrl}/${challengeId}`, {}).pipe(
+      tap(result => console.log("Challenge closed successfully:", result)),
+      catchError(error => {
+        console.error("Error closing challenge:", error);
+        alert("No votes in this challenge")
+        return throwError(() => new Error("No votes in this challenge"));
+      })
+    );
   }
 
 

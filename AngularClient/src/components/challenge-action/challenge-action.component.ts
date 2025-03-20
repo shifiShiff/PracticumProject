@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { ChallengeService } from '../../services/challenge.service';
 import { forkJoin, lastValueFrom } from 'rxjs';
-import { MatCardModule } from '@angular/material/card'; // כרטיסים
-import { MatButtonModule } from '@angular/material/button'; // כפתורים
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; // ספינר טעינה
+import { MatCardModule } from '@angular/material/card'; 
+import { MatButtonModule } from '@angular/material/button'; 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'; 
 import { MatDialog } from '@angular/material/dialog';
 import { AddChallengeDialogComponent } from '../add-challenge-dialog/add-challenge-dialog.component';
 
@@ -17,9 +17,9 @@ import { AddChallengeDialogComponent } from '../add-challenge-dialog/add-challen
   styleUrl: './challenge-action.component.css'
 })
 export class ChallengeActionComponent {
-  challenges: any[] = []; // רשימת האתגרים
-  loading: boolean = true; // מצב טעינה
-  load: boolean = true; // מצב טעינה
+  challenges: any[] = []; 
+  loading: boolean = true; 
+  load: boolean = true; 
 
   constructor(private challengeService: ChallengeService, private dialog: MatDialog) {}
 
@@ -35,35 +35,6 @@ changeload() {
   
 }
 
-  // loadChallenges() {
-  //   this.challengeService.getChallenges().subscribe(
-
-  //     challenges => {
-  //       this.challenges = challenges;
-  //       console.log('Challenges loaded:', this.challenges);
-  
-  //       // שליפת פרטי הזוכה עבור כל אתגר
-  //       this.challenges.forEach(challenge => {
-  //         this.challengeService.getWinnerDetails(challenge.id).subscribe({
-  //           next: (winnerDetails) => {
-  //             challenge.winnerDetails = winnerDetails; // הוספת פרטי הזוכה לאתגר
-  //             console.log(`Winner details for challenge ${challenge.id}:`, winnerDetails);
-  //           },
-  //           error: (error) => {
-  //             console.error(`Error loading winner details for challenge ${challenge.id}:`, error);
-  //           },
-  //           complete: () => {
-  //             console.log(`Finished loading winner details for challenge ${challenge.id}`);
-  //           }
-  //         });
-  //       }
-  //     );
-  //     },
-  //     error => {
-  //       console.error('Error loading challenges:', error);
-  //     }
-  // );
-  // }
 
   loadChallenges() {
     this.challengeService.getChallenges().subscribe({
@@ -71,11 +42,10 @@ changeload() {
         this.challenges = challenges;
         console.log('Challenges loaded:', this.challenges);
   
-        // שליפת פרטי הזוכה עבור כל אתגר
         this.challenges.forEach(challenge => {
           this.challengeService.getWinnerDetails(challenge.id).subscribe({
             next: (winnerDetails) => {
-              challenge.winnerDetails = winnerDetails; // הוספת פרטי הזוכה לאתגר
+              challenge.winnerDetails = winnerDetails; 
               console.log(`Winner details for challenge ${challenge.id}:`, winnerDetails);
             },
             error: (error) => {
@@ -83,7 +53,7 @@ changeload() {
             },
             complete: () => {
               console.log(`Finished loading winner details for challenge ${challenge.id}`);
-              this.checkIfChallengesLoaded(); // קריאה לפונקציה בסיום כל קריאה
+              this.checkIfChallengesLoaded(); 
             }
           });
         });
@@ -98,14 +68,14 @@ changeload() {
 
   checkIfChallengesLoaded() {
     const allChallengesLoaded = this.challenges.every(challenge => challenge.winnerDetails); 
-    this.load = allChallengesLoaded;  // אם יש אתגר ללא winnerDetails, נשאיר את load ב-true
+    this.load = allChallengesLoaded; 
   }
 
   closeChallenge(challengeId: number) {
   this.challengeService.closeChallenge(challengeId).subscribe({
     next: (response: any) => {
       console.log('Challenge closed successfully:', response);
-      this.loadChallenges(); // טוען מחדש את רשימת האתגרים
+      this.loadChallenges(); 
     },
     error: (error: any) => {
       console.error('Error closing challenge:', error);
@@ -128,12 +98,11 @@ openAddChallengeDialog() {
       await this.challengeService.AddCallenge(result).subscribe({
         next: (response: any) => {
           console.log('Challenge Add successfully:', response);
-          this.loadChallenges(); // טוען מחדש את רשימת האתגרים
+          this.loadChallenges(); 
         },
         error: (error: any) => {
           console.error('Error Adding challenge:', error);
         },
-      // קריאה לשרת להוספת האתגר
     }
   )};
 }

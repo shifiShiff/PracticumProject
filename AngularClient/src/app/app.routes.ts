@@ -18,5 +18,4 @@ export const routes: Routes = [
             { path: 'challenges', component: ChallengeActionComponent, canActivate: [authGuard] },
         ]
     },
-    // { path: 'challenges', component: ChallengeActionComponent, canActivate: [authGuard] },
 ];
