@@ -78,10 +78,10 @@ namespace Pictures.Data.Reposetories
             return true;
         }
 
-        public async Task<bool> UpdateActiveAsync(int id)
+        public async Task<string> UpdateActiveAsync(int id)
         {
             var challenge = await _context.Challenges.FindAsync(id);
-            if (challenge == null) return false;
+            if (challenge == null) return "";
 
             var topImage = await _context.Votes
             .Where(v => v.ChallengeId == id)
@@ -97,23 +97,40 @@ namespace Pictures.Data.Reposetories
 
             if (topImage != null)
             {
+
+
+                //{
                 // שליפת ה-UserId של מי שהעלה את התמונה
                 var image = await _context.Images
                     .Where(i => i.Id == topImage)
                     .Select(i => new { i.Id, i.UserId })
                     .FirstOrDefaultAsync();
 
+                Console.WriteLine("image " + image);
                 if (image != null)
                 {
                     challenge.WinnerImageId = image.Id; // עדכון בטבלת האתגרים
                     challenge.WinnerId = image.UserId;
+
+                    //Console.WriteLine(image.Id);
+                    //Console.WriteLine(image.UserId);
                 }
+                //}
+
+
+                challenge.Active = false;
+
+                await _context.SaveChangesAsync();
+                //var mail = await _context.Users.FirstOrDefaultAsync(u => u.Id == image.UserId);
+                var winnerEmail = await _context.Users
+                .Where(u => u.Id == image.UserId)
+                .Select(u => u.Email)
+                .FirstOrDefaultAsync();
+                await _context.SaveChangesAsync();
+
+                return winnerEmail;
             }
-
-            challenge.Active = false;
-
-            await _context.SaveChangesAsync();
-            return true;
+            return "";
         }
     }
 }

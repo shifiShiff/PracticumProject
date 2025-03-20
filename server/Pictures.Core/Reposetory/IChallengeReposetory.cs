@@ -12,7 +12,7 @@ namespace Pictures.Core.Reposetory
     {
         Task<int> GetCurrentChallengeAsync();
         Task<bool> PostAsync(Challenge challenge);
-        Task<bool> UpdateActiveAsync(int id);
+        Task<string> UpdateActiveAsync(int id);
         Task<Challenge> GetChallengeById(int id);
         Task<List<ChallengeVoteDto>> GetVotePerCahllengeAsync();
         Task<List<Challenge>> GetAllChallengesAsync();

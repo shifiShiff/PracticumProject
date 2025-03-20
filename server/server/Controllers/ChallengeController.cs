@@ -3,7 +3,6 @@ using Pictures.Core.DTOs;
 using Pictures.Core.Modals;
 using Pictures.Core.Service;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Pictures.API.Controllers
 {
@@ -21,7 +20,7 @@ namespace Pictures.API.Controllers
         [HttpGet("current")]
         public async Task<ActionResult<int>> GetCurrentChallengeAsync()
         {
-            var challenge =await _challengeService.GetCurrentChallengeAsync();
+            var challenge = await _challengeService.GetCurrentChallengeAsync();
             if (challenge != 0)
             {
                 return Ok(challenge);
@@ -66,13 +65,15 @@ namespace Pictures.API.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<bool>> Put(int id)
         {
-            return await _challengeService.UpdateActiveAsync(id);
+            var res = await _challengeService.UpdateActiveAsync(id);
+            if (res != "")
+            {
+                await _challengeService.SendEmailAsync(res, "Congratulations🥳", "Hi! we are happy to tell you that your image got the max count of votes \n You are the winner in this challenge!");
+                return Ok(true);
+            }
+            return BadRequest(false);
+
         }
 
-        //// DELETE api/<ChallengeController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

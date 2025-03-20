@@ -13,11 +13,13 @@ namespace Pictures.Core.Service
         Task<int> GetCurrentChallengeAsync();
 
         Task<bool> PostAsync(ChallengePost challenge);
-        Task<bool> UpdateActiveAsync(int id);
+        Task<string> UpdateActiveAsync(int id);
         Task<Challenge> GetChallengeById(int id);
         Task<List<ChallengeVoteDto>> GetVotePerCahllengeAsync();
         Task<List<Challenge>> GetAllChallengesAsync();
         Task<User> GetUserDetailByChallengeAsync(int challengeId);
+
+        Task SendEmailAsync(string toEmail, string subject, string body);
 
 
     }
