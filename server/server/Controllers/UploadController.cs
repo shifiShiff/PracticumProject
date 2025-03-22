@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Pictures.Core.Modals;
 using Pictures.Core.DTOs;
 using Pictures.Core.Service;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Pictures.API.Controllers
@@ -28,6 +29,8 @@ namespace Pictures.API.Controllers
     
 
         [HttpPost("upload-file/{userId}/{challengeId}")]
+        [Authorize(Roles = "User")]
+
         public async Task<IActionResult> UploadFile(int userId, int challengeId, IFormFile file)
         {
             if (file == null || file.Length == 0)

@@ -13,7 +13,6 @@ using Amazon.S3;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://0.0.0.0:5131");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -130,5 +129,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+
 
 app.Run();
