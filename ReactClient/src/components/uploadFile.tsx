@@ -51,7 +51,7 @@ const decoded: any = jwtDecode(token);
 const userId= decoded.userId;
 
 
-      const response = await apiClient.post(`http://localhost:5131/api/Upload/upload-file/${userId}/${challengeId}`, formData,
+      const response = await apiClient.post(`/Upload/upload-file/${userId}/${challengeId}`, formData,
         { headers: { "Content-Type": "multipart/form-data" } }
 
       );
