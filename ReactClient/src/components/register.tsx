@@ -1,11 +1,10 @@
 
-
-import axios from 'axios';
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import userStore from '../store/userStore';
 import { useNavigate } from 'react-router-dom';
+import apiClient from './interceptor';
 
 const Register: React.FC = () => {
   const [registerError, setRegisterError] = useState('');
@@ -18,7 +17,7 @@ const Register: React.FC = () => {
     console.log(data);
 
     try {
-      const response = await axios.post("http://localhost:5131/api/User/register", {
+      const response = await apiClient.post("/User/register", {
         UserId: data.id,
         Name: data.name,
         Email: data.email,

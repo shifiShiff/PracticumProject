@@ -39,7 +39,7 @@ const UploadFile = () => {
     formData.append('file', file);  
 
     try {
-      const currentChallengeResponse = await apiClient.get('http://localhost:5131/api/Challenge/current');
+      const currentChallengeResponse = await apiClient.get('/Challenge/current');
       const challengeId = currentChallengeResponse.data;
       console.log(challengeId);
 

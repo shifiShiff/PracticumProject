@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
-import axios from "axios";
 import userStore from "../store/userStore";
 import { useNavigate } from 'react-router-dom';
+import apiClient from "./interceptor";
 
 const Login = () => {
   const [loginError, setLoginError] = useState("");
@@ -17,7 +17,7 @@ const Login = () => {
     setLoginError("");
     console.log(data);
     try {
-    const response = await axios.post("http://localhost:5131/api/User/login", { Email: data?.email, Password: data?.password });
+    const response = await apiClient.post("/User/login", { Email: data?.email, Password: data?.password });
     localStorage.setItem("token", response.data.token);
     userStore.login({ email: data.email, password: data.password });
     console.log("login successfully", response.data);

@@ -23,7 +23,7 @@ const Dashboard = observer(() => {
         const currentChallengeResponse = await apiClient.get('Challenge/current');
         const challengeId = currentChallengeResponse.data;
 
-        const challengeResponse = await apiClient.get(`http://localhost:5131/api/Challenge/${challengeId}`);
+        const challengeResponse = await apiClient.get(`/Challenge/${challengeId}`);
         setChallenge(challengeResponse.data);
 
         await fetchImages(challengeId);
