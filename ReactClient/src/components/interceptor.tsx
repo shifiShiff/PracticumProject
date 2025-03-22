@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  // baseURL: process.env.REACT_APP_API_BASE_URL, 
-  baseURL: "http://practicumserver-5ut1.onrender.com/api", 
+  baseURL: process.env.REACT_APP_API_BASE_URL, 
+  // baseURL: "http://practicumserver-5ut1.onrender.com/api", 
   headers: {
     "Content-Type": "application/json",
   },
