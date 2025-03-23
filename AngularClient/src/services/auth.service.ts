@@ -9,7 +9,7 @@ import { environment } from '../environment.prod';
 })
 export class AuthService {
   
-    private apiUrl = environment.apiUrl; 
+    private apiUrl = environment.apiUrl ||"http://localhost:5131/api/"; 
   
 
   private isLoggedInSubject = new BehaviorSubject<boolean>(false); 
