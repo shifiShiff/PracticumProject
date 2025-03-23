@@ -2,13 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from '../environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChallengeService {
 
-  private apiUrl = 'http://localhost:5131/api/Challenge'; 
+  private apiUrl = environment.apiUrl; 
+  // private apiUrl = 'http://localhost:5131/api/Challenge'; 
 
   constructor(private http: HttpClient) {}
 
@@ -18,11 +20,11 @@ export class ChallengeService {
     return res;
   }
   getChallenges(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/allChallenges`);
+    return this.http.get<any[]>(`${this.apiUrl}/Challenge/allChallenges`);
   }
 
   getWinnerDetails(challengeId: number): Observable<any> {
-    const details= this.http.get<any>(`${this.apiUrl}/${challengeId}/winner`);
+    const details= this.http.get<any>(`${this.apiUrl}/Challenge/${challengeId}/winner`);
     console.log("In get winner"+details);
     return details;
      
@@ -31,7 +33,7 @@ export class ChallengeService {
   closeChallenge(challengeId: number): Observable<any> {
     console.log("In close challenge");
    
-    return this.http.put(`${this.apiUrl}/${challengeId}`, {}).pipe(
+    return this.http.put(`${this.apiUrl}/Challenge/${challengeId}`, {}).pipe(
       tap(result => console.log("Challenge closed successfully:", result)),
       catchError(error => {
         console.error("Error closing challenge:", error);
@@ -45,7 +47,7 @@ export class ChallengeService {
   AddCallenge(challenge: any): Observable<any> {
     console.log("In add challenge");
     
-    return this.http.post(`${this.apiUrl}`, {Title: challenge.title, Description: challenge.description});
+    return this.http.post(`${this.apiUrl}/Challenge`, {Title: challenge.title, Description: challenge.description});
   }
 
 }
