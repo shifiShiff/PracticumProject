@@ -15,7 +15,7 @@ export class ChallengeService {
   constructor(private http: HttpClient) {}
 
   getChallengesWithVotes(): Observable<any[]> {
-    const res = this.http.get<any[]>(`${this.apiUrl}`);
+    const res = this.http.get<any[]>(`${this.apiUrl}/Challenge`);
     console.log(res);
     return res;
   }
