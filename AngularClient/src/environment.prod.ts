@@ -5,6 +5,6 @@
 
 export const environment = {
     production: true,
-    apiUrl: ''
+    apiUrl: 'https://practicumserver-5ut1.onrender.com'
   };
   

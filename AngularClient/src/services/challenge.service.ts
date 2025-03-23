@@ -9,7 +9,7 @@ import { environment } from '../environment.prod';
 })
 export class ChallengeService {
 
-  private apiUrl = environment.apiUrl ||"http://localhost:5131/api/"; 
+  private apiUrl = environment.apiUrl ; 
   // private apiUrl = 'http://localhost:5131/api/Challenge'; 
 
   constructor(private http: HttpClient) {}
