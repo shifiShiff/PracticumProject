@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 import requests
 import base64
 from flask_cors import CORS
+import os
+
 
 app = Flask(__name__)
 CORS(app)  # זה פותח את הגישה מכל מקור
@@ -13,7 +15,7 @@ def analyze_image_with_challenge(image_url: str, challenge_description: str) -> 
     image_base64 = base64.b64encode(image_data).decode("utf-8")
 
     # הגדרות API
-    api_key = ""
+    api_key = os.environ.get("GEMINI_API_KEY")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
     headers = {
         "Content-Type": "application/json"
