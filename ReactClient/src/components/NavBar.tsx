@@ -8,7 +8,6 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import logo from "../assets/logo.png";
-import Footer from './footer';
 
 
 const NavBar = () => {
