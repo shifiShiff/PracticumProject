@@ -75,11 +75,25 @@ const ImageGallery = observer(() => {
   const groupedImages = groupImagesByChallengeId(images);
 
   const getMaxVotesImage = (images: ImageType[]) => {
+    // //ככככככככככככככככככככככככ
+    // if (images.length === 0) return null;
+
     return images.reduce((maxImage, image) => image.votes > maxImage.votes ? image : maxImage, images[0]);
   };
 
+  // if (images=== null || images.length === 0) {
+  //   return (
+  //     <div style={{ marginTop: '80px', textAlign: 'center' }}>
+  //       <Typography variant="h5" sx={{ color: 'gray' }}>
+  //         אין אתגרים קודמים להצגה 🙃
+  //       </Typography>
+  //     </div>
+  //   );
+  // }
+  
+
 return (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '80px' }}>
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '120px' }}>
     {Object.keys(groupedImages).map((challengeIdStr) => {
       const challengeId = Number(challengeIdStr);
       if (challengeId === currentChallengeId) {
@@ -89,7 +103,7 @@ return (
       const maxVotesImage = getMaxVotesImage(groupedImages[challengeId]);
 
       return (
-        <Accordion key={challengeId} style={{ width: '100%', maxWidth: '800px', marginBottom: '20px' }}>
+        <Accordion key={challengeId} style={{ width: '100%', maxWidth: '800px', marginBottom: '20px',borderRadius:'10px' }}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`panel${challengeId}-content`}
@@ -115,7 +129,7 @@ return (
             >
               
             </Typography>
-            {groupedImages[challengeId].map((image) => (
+            {groupedImages[challengeId]?.map((image) => (
               <Box
                 key={image.id}
                 sx={{
@@ -123,7 +137,7 @@ return (
                   maxWidth: '600px',
                   marginBottom: '20px',
                   boxShadow:
-                    image.id === maxVotesImage.id
+                    image.id === maxVotesImage?.id
                       ? '0 10px 20px rgb(255, 0, 98)' 
                       : '0 4px 8px rgba(0, 0, 0, 0.1)',
                   borderRadius: '10px',
@@ -131,7 +145,7 @@ return (
                   position: 'relative',
                 }}
               >
-                {image.id === maxVotesImage.id && (
+                {image.id === maxVotesImage?.id && (
                   <Typography
                     variant="h6"
                     component="div"

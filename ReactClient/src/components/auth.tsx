@@ -7,7 +7,7 @@ const Auth: React.FC = () => {
     const navigate = useNavigate();
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height:  '100vh' }}>
             <Stack spacing={2} direction="row">
                 <Button
                     variant="contained"

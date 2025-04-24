@@ -1,7 +1,4 @@
 
-
-
-
 import { useEffect, useState } from 'react';
 import ImageStore, { ImageType } from '../store/ImageStore';
 import { Box, Typography, Card, CardContent, CardMedia, IconButton } from '@mui/material';
@@ -59,7 +56,7 @@ const Dashboard = observer(() => {
     return <div>{error}</div>;
   }
 
-  return (
+  return (<>
     <Box
       sx={{
         marginTop: '100px',
@@ -81,7 +78,7 @@ const Dashboard = observer(() => {
             backgroundColor: 'rgb(255, 255, 255)',
             boxShadow: '0 3px 6px rgb(255, 0, 98)',
             maxWidth: '800px',
-            width: '100%',
+            width: '80%',
           }}
         >
           <Typography
@@ -171,6 +168,11 @@ const Dashboard = observer(() => {
         ))}
       </Box>
     </Box>
+
+    {/* <Footer /> */}
+
+
+    </>
   );
 });
 

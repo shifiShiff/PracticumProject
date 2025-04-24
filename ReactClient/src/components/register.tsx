@@ -47,7 +47,7 @@ const Register: React.FC = () => {
           padding: 3,
           backgroundColor: "#f5f5f5",
           borderRadius: 2,
-          marginTop:'100px',
+          marginTop:'200px',
           boxShadow: '0 8px 10px rgb(255, 0, 98)'
 
         }}

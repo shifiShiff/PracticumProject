@@ -8,6 +8,7 @@ import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import logo from "../assets/logo.png";
+import Footer from './footer';
 
 
 const NavBar = () => {
@@ -24,8 +25,8 @@ const NavBar = () => {
       window.removeEventListener("storage", handleStorageChange); // ניקוי האזנה
     };
   }, []);
-  return (
-    <AppBar position="fixed" sx={{ background: 'linear-gradient(45deg,rgb(6, 6, 6) 30%,rgb(66, 71, 70) 90%)', padding: '5px 0' }}>
+  return (<>
+    <AppBar position="fixed" sx={{ background: 'linear-gradient(45deg,rgb(6, 6, 6) 30%,rgb(66, 71, 70) 90%)', padding: '5px 0'}}>
       <Toolbar>
 
         <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/dashboard" sx={{ marginRight: 2, color: 'rgb(253, 7, 151)' }}>
@@ -97,6 +98,9 @@ const NavBar = () => {
         </Button>
       </Toolbar>
     </AppBar>
+
+</>
+    
   );
 };
 

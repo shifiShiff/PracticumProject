@@ -40,7 +40,8 @@ const Login = () => {
           padding: 3,
           backgroundColor: "rgb(252, 252, 252)",
           borderRadius: 2,
-          boxShadow: '0 8px 10px rgb(255, 0, 98)'
+          boxShadow: '0 8px 10px rgb(255, 0, 98)',
+          marginTop:'200px'
           
         }}
       >
