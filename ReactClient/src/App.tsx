@@ -25,6 +25,8 @@ import { RouterProvider } from 'react-router-dom';
 import './App.css';
 import { myRouter } from './Router';
 import Footer from './components/footer';
+import bg from '../assets/background.jpg';
+
 
 // function App() {
 //   return (
@@ -180,7 +182,9 @@ function App() {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: "url('/src/assets/background.jpg')",
+          // backgroundImage: "url('/src/assets/background.jpg')",
+          backgroundImage: `url(${bg})`,
+
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           opacity: 0.5,
