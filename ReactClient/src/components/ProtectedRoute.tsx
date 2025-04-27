@@ -1,16 +1,3 @@
-// import { Navigate } from "react-router-dom";
-
-// const ProtectedRoute = ({ children }: { children: React.ReactElement }) => {
-//     const token = localStorage.getItem("token"); 
-//     if (!token) {
-//         return <Navigate to="/login" replace />; 
-//     }
-//     return children;
-// };
-
-// export default ProtectedRoute;
-
-
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 

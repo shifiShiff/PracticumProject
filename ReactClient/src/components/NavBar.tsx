@@ -1,5 +1,3 @@
-
-
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
@@ -11,7 +9,7 @@ import logo from "../assets/logo.png";
 
 
 const NavBar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); // בדיקת טוקן ראשונית
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token")); 
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -21,7 +19,7 @@ const NavBar = () => {
     window.addEventListener("storage", handleStorageChange);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange); // ניקוי האזנה
+      window.removeEventListener("storage", handleStorageChange); 
     };
   }, []);
   return (<>

@@ -19,14 +19,12 @@ const ImageGallery = observer(() => {
 
   const fetchImages = async () => {
     await ImageStore.getAllImages();
-    console.log("Fetch images");
     setImages(ImageStore.imageList);
   };
 
   const fetchChallengeDetails = async (challengeId: number) => {
     try {
       const response = await apiClient.get<Challenge>(`/Challenge/${challengeId}`);
-      // const response = await axios.get<Challenge>(`http://localhost:5131/api/Challenge/${challengeId}`);
       setChallenges(prevChallenges => ({
         ...prevChallenges,
         [challengeId]: response.data
@@ -39,7 +37,6 @@ const ImageGallery = observer(() => {
   const fetchCurrentChallengeId = async () => {
     try {
       const response = await apiClient.get<number>('/Challenge/current');
-      // const response = await axios.get<number>('http://localhost:5131/api/Challenge/current');
       setCurrentChallengeId(response.data);
     } catch (error) {
       console.error('Error fetching current challenge ID:', error);
@@ -75,22 +72,10 @@ const ImageGallery = observer(() => {
   const groupedImages = groupImagesByChallengeId(images);
 
   const getMaxVotesImage = (images: ImageType[]) => {
-    // //ככככככככככככככככככככככככ
-    // if (images.length === 0) return null;
-
+    
     return images.reduce((maxImage, image) => image.votes > maxImage.votes ? image : maxImage, images[0]);
   };
 
-  // if (images=== null || images.length === 0) {
-  //   return (
-  //     <div style={{ marginTop: '80px', textAlign: 'center' }}>
-  //       <Typography variant="h5" sx={{ color: 'gray' }}>
-  //         אין אתגרים קודמים להצגה 🙃
-  //       </Typography>
-  //     </div>
-  //   );
-  // }
-  
 
 return (
   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '120px' }}>

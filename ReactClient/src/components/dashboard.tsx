@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import ImageStore, { ImageType } from '../store/ImageStore';
 import { Box, Typography, Card, CardContent, CardMedia, IconButton } from '@mui/material';
@@ -104,18 +103,13 @@ const Dashboard = observer(() => {
           gridTemplateColumns: '1fr',
           gap: '20px',
           justifyContent: 'center',
-          // width: '100%',
-          // maxWidth: '400px',
+
         }}
       >
         {images.map((image) => (
           <Card
             key={image.id}
             sx={{
-              // width: '100%',
-              // maxWidth:'500px',
-              // maxHeight:'500px',
-              // height:'100%',
               boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)',
               borderRadius: '15px',
               overflow: 'hidden',
@@ -168,9 +162,6 @@ const Dashboard = observer(() => {
         ))}
       </Box>
     </Box>
-
-    {/* <Footer /> */}
-
 
     </>
   );

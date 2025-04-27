@@ -107,16 +107,11 @@ const Footer = () => {
           position: 'fixed',
           bottom: 0,
             left: 0,
-
           width: '20%',
-        //   backgroundColor: '#000',
         backgroundColor: 'rgb(255, 0, 98)',
-        // backgroundColor: 'rgba(0, 0, 0, 0.8)',
-
           color: 'white',
           textAlign: 'center',
           borderRadius: '0 15px 0 0 ',
-        //   py: 2,
           padding: 0,
           zIndex: 2,
           marginTop: '150px',

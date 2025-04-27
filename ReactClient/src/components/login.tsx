@@ -1,5 +1,4 @@
 
-
 import { useState } from "react";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
@@ -15,16 +14,13 @@ const Login = () => {
 
   const onSubmit = async (data: any) => {
     setLoginError("");
-    console.log(data);
     try {
     const response = await apiClient.post("/User/login", { Email: data?.email, Password: data?.password });
     localStorage.setItem("token", response.data.token);
     userStore.login({ email: data.email, password: data.password });
-    console.log("login successfully", response.data);
     navigate('/dashboard');
     window.dispatchEvent(new Event("storage"));
       } catch (error) {
-        console.error("login failed", error);
         alert("Error: No such user")
       }
   };

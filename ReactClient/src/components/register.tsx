@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
@@ -14,7 +13,6 @@ const Register: React.FC = () => {
 
   const onSubmit = async (data: any) => {
     setRegisterError('');
-    console.log(data);
 
     try {
       const response = await apiClient.post("/User/register", {
@@ -25,8 +23,6 @@ const Register: React.FC = () => {
       });
       localStorage.setItem("token", response.data.token);
       userStore.register({email: data.email, password: data.password});
-      // localStorage.setItem("userId", response.data.userId);
-      console.log("register successfully", response.data);
       navigate('/dashboard');
       window.dispatchEvent(new Event("storage"));
 
