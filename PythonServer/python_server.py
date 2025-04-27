@@ -15,7 +15,8 @@ def analyze_image_with_challenge(image_url: str, challenge_description: str) -> 
     image_base64 = base64.b64encode(image_data).decode("utf-8")
 
     # הגדרות API
-    api_key = os.environ.get("GEMINI_API_KEY")
+    # api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = "AIzaSyBg0tBfrmCpmIkvQNkZjjeURd221KsvieM"
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
     headers = {
         "Content-Type": "application/json"
@@ -27,9 +28,9 @@ def analyze_image_with_challenge(image_url: str, challenge_description: str) -> 
             {
                 "parts": [
                     {
-                        "text": f"""אתה שופט בתחרות יצירת תמונות.תענה כמו שופט ואל תחזיר שום טקסט שמכיל מידע מעבר לכותרת האתגר ותיאור האתגר תוריד פרטים שקשורים לממסד נתונים. המשתתפים התבקשו ליצור תמונה בנושא:\n'{challenge_description}'.
+                        "text": f"""אתה שופט בתחרות יצירת תמונות.תענה כמו שופט ואל תחזיר שום טקסט שמכיל מידע מעבר לכותרת האתגר ותיאור האתגר תוריד פרטים שקשורים לממסד נתונים גם את מספר האתגר אל תציג, את כותרת האתגר והתיאור תציג בשפה שהוא מופיע במקורי. המשתתפים התבקשו ליצור תמונה בנושא:\n'{challenge_description}'.
 נתח את התמונה לפי הקריטריונים: מקוריות, התאמה לנושא, קומפוזיציה, מעלות וחסרונות.
-האם התמונה עומדת באתגר?"""
+  .אם התמונה עומדת באתגר? תענה בהרחבה ובמוממחיות על כל קריטריון. תרווח ותרד שורות בצורה מתאימה לפני כל קריטוריון שיהיה בצורה מסודרת לעין אם אימוגים"""
                     },
                     {
                         "inline_data": {
@@ -49,12 +50,12 @@ def analyze_image_with_challenge(image_url: str, challenge_description: str) -> 
         text = response.json()["candidates"][0]["content"]["parts"][0]["text"]
         
         # הוספת אימוג'ים לפי התשובה
-        if "לא עומדת" in text or "לא טובה" in text or "נכשלת" in text:
-            text += " 😕❌"
-        else:
-            text += " 🎉😊"
+        # if "לא עומדת" in text or "לא טובה" in text or "נכשלת" in text:
+        #     text += " 😕❌"
+        # else:
+        #     text += " 🎉😊"
         
-        return text
+        return text 
     else:
         return f"שגיאה: {response.status_code} - {response.text}"
 
