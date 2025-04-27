@@ -28,7 +28,7 @@ export class ChallengeService {
      
   }
   getWinnerImage(challengeId: number): Observable<any> {
-    const details= this.http.get<any>(`${this.apiUrl}/Image/TopImage/${challengeId}`);
+    const details= this.http.get<any>(`${this.apiUrl}/Image/TopImage${challengeId}`);
     console.log("In get winner"+details);
     return details;
      
