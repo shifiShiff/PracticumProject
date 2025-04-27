@@ -64,7 +64,7 @@ export class VotegraphComponent {
         },
         fill: {
           opacity: 1,
-          colors: ['#3f51b5'] 
+          colors: ['rgb(255, 0, 98)'] 
         },
         
       };

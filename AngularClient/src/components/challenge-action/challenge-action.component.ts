@@ -47,6 +47,15 @@ changeload() {
             next: (winnerDetails) => {
               challenge.winnerDetails = winnerDetails; 
               console.log(`Winner details for challenge ${challenge.id}:`, winnerDetails);
+              this.challengeService.getWinnerImage(challenge.id).subscribe({
+                next: (winnerImage) => {
+                  challenge.winnerImage = winnerImage; 
+                  console.log(`Winner image for challenge ${challenge.id}:`, winnerImage);
+                },
+                error: (error) => {
+                  console.error(`Error loading winner image for challenge ${challenge.id}:`, error);
+                }
+              });
             },
             error: (error) => {
               console.error(`Error loading winner details for challenge ${challenge.id}:`, error);

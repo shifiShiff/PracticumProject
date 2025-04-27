@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../environment.prod';
 
@@ -10,7 +9,6 @@ import { environment } from '../environment.prod';
 export class ChallengeService {
 
   private apiUrl = environment.apiUrl ; 
-  // private apiUrl = 'http://localhost:5131/api/Challenge'; 
 
   constructor(private http: HttpClient) {}
 
@@ -25,6 +23,12 @@ export class ChallengeService {
 
   getWinnerDetails(challengeId: number): Observable<any> {
     const details= this.http.get<any>(`${this.apiUrl}/Challenge/${challengeId}/winner`);
+    console.log("In get winner"+details);
+    return details;
+     
+  }
+  getWinnerImage(challengeId: number): Observable<any> {
+    const details= this.http.get<any>(`${this.apiUrl}/Image/TopImage/${challengeId}`);
     console.log("In get winner"+details);
     return details;
      

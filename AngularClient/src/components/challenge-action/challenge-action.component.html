@@ -14,6 +14,10 @@
                 Name: {{ challenge.winnerDetails.name }}<br>
                 Email: {{ challenge.winnerDetails.email }}
             </p>
+            <a [href]="challenge.winnerImage" target="_blank" class="winner-link">
+                View Winning Image 👈
+            </a>
+            
 
             }
             @else{
