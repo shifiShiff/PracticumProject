@@ -14,10 +14,12 @@
                 Name: {{ challenge.winnerDetails.name }}<br>
                 Email: {{ challenge.winnerDetails.email }}
             </p>
+            @if (challenge.winnerImage) {
+
             <a [href]="challenge.winnerImage.imageUrl" target="_blank" class="winner-link">
-                View Winning Image 👈 
+                View Winning Image 👈
             </a>
-            
+            }
 
             }
             @else{
@@ -25,7 +27,7 @@
             <span>No Winner already</span>
 
             <mat-card-actions>
-                <button mat-raised-button  class="add-challenge-button" (click)="closeChallenge(challenge.id)">
+                <button mat-raised-button class="add-challenge-button" (click)="closeChallenge(challenge.id)">
                     finish challenge
                 </button>
             </mat-card-actions>
@@ -39,9 +41,9 @@
 </div>
 
 
- @if (load==true) {
+@if (load==true) {
 
 <button class="add-challenge-button" color="accent" (click)="openAddChallengeDialog()">
     Add Challenge
 </button>
- }
+}
