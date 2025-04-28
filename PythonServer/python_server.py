@@ -15,7 +15,8 @@ def analyze_image_with_challenge(image_url: str, challenge_description: str) -> 
     image_base64 = base64.b64encode(image_data).decode("utf-8")
 
     # הגדרות API
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = "AIzaSyBg0tBfrmCpmIkvQNkZjjeURd221KsvieM"
+    # api_key = os.environ.get("GEMINI_API_KEY")
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
     headers = {
         "Content-Type": "application/json"
