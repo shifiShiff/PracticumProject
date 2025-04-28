@@ -1,8 +1,14 @@
-import {  CardContent, CardMedia} from '@mui/material';
-import { useEffect, useState } from 'react';
+
+
+
+import { CardContent, CardMedia } from '@mui/material';
+import { useEffect, useState, useRef } from 'react';
 import { observer } from "mobx-react-lite";
-import { Accordion, AccordionSummary, AccordionDetails, Typography, Box } from '@mui/material';
+import { Typography, Box, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ImageStore, { ImageType } from '../store/ImageStore';
 import apiClient from './interceptor';
 
@@ -16,6 +22,9 @@ const ImageGallery = observer(() => {
   const [images, setImages] = useState<ImageType[]>([]);
   const [challenges, setChallenges] = useState<{ [key: number]: Challenge }>({});
   const [currentChallengeId, setCurrentChallengeId] = useState<number | null>(null);
+  const [expandedChallenge, setExpandedChallenge] = useState<number | null>(null);
+  const [activeChallenge, setActiveChallenge] = useState<number | null>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const fetchImages = async () => {
     await ImageStore.getAllImages();
@@ -52,11 +61,19 @@ const ImageGallery = observer(() => {
     const fetchAllChallengeDetails = async () => {
       const uniqueChallengeIds = Array.from(new Set(images.map(image => image.challengeId)));
       await Promise.all(uniqueChallengeIds.map(challengeId => fetchChallengeDetails(challengeId)));
+      
+      // Set the first challenge as active by default
+      if (uniqueChallengeIds.length > 0 && activeChallenge === null) {
+        const pastChallenges = uniqueChallengeIds.filter(id => id !== currentChallengeId);
+        if (pastChallenges.length > 0) {
+          setActiveChallenge(pastChallenges[0]);
+        }
+      }
     };
     if (images.length > 0) {
       fetchAllChallengeDetails();
     }
-  }, [images]);
+  }, [images, currentChallengeId, activeChallenge]);
 
   const groupImagesByChallengeId = (images: ImageType[]) => {
     return images.reduce((groups, image) => {
@@ -72,130 +89,258 @@ const ImageGallery = observer(() => {
   const groupedImages = groupImagesByChallengeId(images);
 
   const getMaxVotesImage = (images: ImageType[]) => {
-    
     return images.reduce((maxImage, image) => image.votes > maxImage.votes ? image : maxImage, images[0]);
   };
 
+  const handleChallengeClick = (challengeId: number) => {
+    setExpandedChallenge(expandedChallenge === challengeId ? null : challengeId);
+  };
 
-return (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '120px' }}>
-    {Object.keys(groupedImages).map((challengeIdStr) => {
-      const challengeId = Number(challengeIdStr);
-      if (challengeId === currentChallengeId) {
-        return null; 
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = 300;
+      if (direction === 'left') {
+        carouselRef.current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else {
+        carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       }
-      const challenge = challenges[challengeId];
-      const maxVotesImage = getMaxVotesImage(groupedImages[challengeId]);
+    }
+  };
 
-      return (
-        <Accordion key={challengeId} style={{ width: '100%', maxWidth: '800px', marginBottom: '20px',borderRadius:'10px' }}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`panel${challengeId}-content`}
-            id={`panel${challengeId}-header`}
-          >
-            <Typography
-              variant="h5"
+  const navigateToChallenge = (challengeId: number) => {
+    setActiveChallenge(challengeId);
+    setExpandedChallenge(challengeId);
+  };
+
+  // Get past challenges
+  const pastChallenges = Object.keys(groupedImages)
+    .map(Number)
+    .filter(id => id !== currentChallengeId);
+
+  return (
+    <Box sx={{ 
+      padding: '2rem',
+      minHeight: '100vh',
+      paddingTop: '120px',
+      width: 'calc(80vw - 150px)',
+    }}>
+    
+      {/* Challenge Timeline */}
+      <Box sx={{ position: 'relative', mb: 4 }}>
+        <IconButton 
+          onClick={() => scrollCarousel('left')} 
+          sx={{ 
+            position: 'absolute', 
+            left: 0, 
+            top: '50%', 
+            transform: 'translateY(-50%)', 
+            zIndex: 2,
+            backgroundColor: 'rgb(251, 0, 109)',
+            '&:hover': { backgroundColor: 'rgba(254, 101, 231, 0.9)' }
+          }}
+        >
+          <ChevronLeftIcon />
+        </IconButton>
+        
+        <Box 
+          ref={carouselRef}
+          sx={{ 
+            display: 'flex', 
+            overflowX: 'auto', 
+            padding: '1rem 2rem',
+            scrollbarWidth: 'none',
+            '&::-webkit-scrollbar': { display: 'none' },
+            gap: '1rem'
+          }}
+        >
+          {pastChallenges.map(challengeId => (
+            <Box 
+              key={`timeline-${challengeId}`}
+              onClick={() => navigateToChallenge(challengeId)}
               sx={{
-                fontWeight: 'bold',
-                color:'rgb(255, 0, 98)'
+                minWidth: '200px',
+                height: '100px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: '1rem',
+                borderRadius: '10px',
+                backgroundColor: activeChallenge === challengeId ? 'rgb(255, 0, 98)' : 'white',
+                color: activeChallenge === challengeId ? 'white' : '#333',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                transform: activeChallenge === challengeId ? 'scale(1.05)' : 'scale(1)',
+                '&:hover': {
+                  boxShadow: '0 8px 16px rgba(0,0,0,0.15)',
+                  transform: 'scale(1.05)',
+                }
               }}
             >
-              {challenge ? `${challenge.title}  ${challenge?.description}` : `Challenge ID: ${challengeId}`}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography
-              variant="body1"
-              sx={{
-                color: '#666',
-                marginBottom: '20px',
-              }}
-            >
-              
-            </Typography>
-            {groupedImages[challengeId]?.map((image) => (
-              <Box
-                key={image.id}
-                sx={{
-                  width: '100%',
-                  maxWidth: '600px',
-                  marginBottom: '20px',
-                  boxShadow:
-                    image.id === maxVotesImage?.id
-                      ? '0 10px 20px rgb(255, 0, 98)' 
-                      : '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  borderRadius: '10px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                }}
-              >
-                {image.id === maxVotesImage?.id && (
-                  <Typography
-                    variant="h6"
-                    component="div"
-                    sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      backgroundColor: 'rgb(255, 0, 98)',
-                      opacity: 0.7,
-                      color: '#fff',
-                      textAlign: 'center',
-                      padding: '5px 0',
-                      zIndex: 1,
-                      fontWeight: 'bold',
-                    }}
-                  >
-                    WINNER
-                  </Typography>
-                )}
-                <CardMedia
-                  component="img"
-                  image={image.imageUrl}
-                  alt={image.imageName}
-                  sx={{
-                    height: '300px',
-                    objectFit: 'cover',
-                  }}
-                />
-                <CardContent
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '10px 20px',
-                    backgroundColor: '#f0f0f0',
-                  }}
-                >
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 'bold',
-                      color: '#333',
-                    }}
-                  >
-                    {image.imageName}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 'bold',
-                      color: 'rgb(255, 0, 98)',
-                    }}
-                  >
-                    Votes: {image.votes}
-                  </Typography>
-                </CardContent>
-              </Box>
-            ))}
-          </AccordionDetails>
-        </Accordion>
-      );
-    })}
-  </div>
+              <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+                {challenges[challengeId]?.title || `challenge ${challengeId}`}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+        
+        <IconButton 
+          onClick={() => scrollCarousel('right')} 
+          sx={{ 
+            position: 'absolute', 
+            right: 0, 
+            top: '50%', 
+            transform: 'translateY(-50%)', 
+            zIndex: 2,
+            backgroundColor: 'rgb(251, 0, 109)',
+            '&:hover': { backgroundColor: 'rgba(254, 101, 231, 0.9)' }
+          }}
+        >
+          <ChevronRightIcon />
+        </IconButton>
+      </Box>
 
+      {/* Active Challenge Content */}
+      {activeChallenge !== null && challenges[activeChallenge] && (
+        <Box sx={{
+          backgroundColor: 'white',
+          borderRadius: '15px',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+          overflow: 'hidden',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          transition: 'all 0.3s ease',
+          mt: 4
+        }}>
+          <Box sx={{
+            padding: '2rem',
+            background: 'linear-gradient(to right, #FC466B,rgb(205, 162, 195))',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+          }}>
+            <Typography variant="h5" sx={{ fontWeight: 'bold', direction: 'ltr' }}>
+              {challenges[activeChallenge].title}
+            </Typography>
+            <IconButton 
+              onClick={() => handleChallengeClick(activeChallenge)}
+              sx={{ color: 'white' }}
+            >
+              <ExpandMoreIcon sx={{ 
+                transform: expandedChallenge === activeChallenge ? 'rotate(180deg)' : 'rotate(0)',
+                transition: 'transform 0.3s ease'
+              }} />
+            </IconButton>
+          </Box>
+
+          <Box sx={{
+            padding: '1rem 2rem',
+            backgroundColor: 'rgba(249, 249, 249, 0.8)',
+          }}>
+            <Typography variant="h6" sx={{ direction: 'rtl' }}>
+              {challenges[activeChallenge].description}
+            </Typography>
+          </Box>
+
+          {expandedChallenge === activeChallenge && (
+            <Box sx={{ 
+              padding: '2rem', 
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              gap: '2rem'
+            }}>
+              {groupedImages[activeChallenge]?.map((image) => {
+                const isWinner = image.id === getMaxVotesImage(groupedImages[activeChallenge])?.id;
+                
+                return (
+                  <Box
+                    key={image.id}
+                    sx={{
+                      borderRadius: '15px',
+                      overflow: 'hidden',
+                      boxShadow: isWinner 
+                        ? '0 10px 20px rgba(255, 0, 98, 0.4)' 
+                        : '0 8px 16px rgba(0, 0, 0, 0.1)',
+                      transition: 'all 0.3s ease',
+                      position: 'relative',
+                      '&:hover': {
+                        transform: 'translateY(-10px)',
+                        boxShadow: isWinner 
+                          ? '0 15px 30px rgba(255, 0, 98, 0.5)' 
+                          : '0 12px 24px rgba(0, 0, 0, 0.15)',
+                      }
+                    }}
+                  >
+                    {isWinner && (
+                      <Box sx={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        backgroundColor: 'rgb(255, 0, 98)',
+                        color: 'white',
+                        padding: '0.5rem 1rem',
+                        borderBottomLeftRadius: '10px',
+                        zIndex: 1,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem'
+                      }}>
+                        <EmojiEventsIcon />
+                        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>Winner</Typography>
+                      </Box>
+                    )}
+                    <CardMedia
+                      component="img"
+                      image={image.imageUrl}
+                      alt={image.imageName}
+                      sx={{
+                        height: '250px',
+                        objectFit: 'cover',
+                        transition: 'transform 0.5s ease',
+                        '&:hover': {
+                          transform: 'scale(1.05)'
+                        }
+                      }}
+                    />
+                    <CardContent sx={{
+                      backgroundColor: isWinner ? 'rgba(255, 0, 98, 0.05)' : '#fff',
+                      padding: '1.5rem',
+                      borderTop: isWinner ? '3px solid rgb(255, 0, 98)' : 'none'
+                    }}>
+                      <Box sx={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        direction: 'rtl'
+                      }}>
+                        <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#333' }}>
+                          {image.imageName}
+                        </Typography>
+                        <Box sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          backgroundColor: 'rgba(255, 0, 98, 0.1)',
+                          padding: '0.5rem 1rem',
+                          borderRadius: '20px'
+                        }}>
+                          <Typography variant="body1" sx={{ color: 'rgb(255, 0, 98)', fontWeight: 'bold' }}>
+                            {image.votes}
+                          </Typography>
+                          <Typography variant="body2" sx={{ color: '#555' }}>Votes</Typography>
+                        </Box>
+                      </Box>
+                    </CardContent>
+                  </Box>
+                );
+              })}
+            </Box>
+          )}
+        </Box>
+      )}
+    </Box>
   );
 });
 
