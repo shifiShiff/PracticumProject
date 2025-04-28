@@ -8,7 +8,7 @@ namespace Pictures.Core.DTOs
 {
     public class ImagePost
     {
-        public int UserId { get; set; } // מזהה המשתמש שהצביע
+        public int UserId { get; set; }
         public int ChallengeId { get; set; }
         public int ImageId { get; set; } 
     }

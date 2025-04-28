@@ -24,7 +24,6 @@ namespace Pictures.API.Controllers
 
         //שליפת כל התמונות
         [HttpGet]
-        //[Authorize(Roles = "User")]
         public async Task<ActionResult<Image>> GetAllImagesAsync()
         {
             var ImageList = await _imageService.GetAllImagesAsync();
@@ -34,7 +33,6 @@ namespace Pictures.API.Controllers
 
         //שליפת התמונה הזוכה לפי אתגר
         [HttpGet("TopImage{ChallengeId}")]
-        //[Authorize(Roles = "User")]
         public async Task<ActionResult<Image>> GetTopImageAsync(int ChallengeId)
         {
             return await _imageService.GetTopImageAsync(ChallengeId);

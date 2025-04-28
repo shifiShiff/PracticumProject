@@ -30,7 +30,6 @@ builder.Services.AddScoped<IVoteReposetory, VoteReposetory>();
 builder.Services.AddDbContext<DataContext>();
 
 
-//builder.Services.AddSingleton<IAmazonS3, AmazonS3Client>();
 var awsOptions = builder.Configuration.GetSection("AWS");
 builder.Services.AddSingleton<IAmazonS3>(sp =>
     new AmazonS3Client(
@@ -41,7 +40,6 @@ builder.Services.AddSingleton<IAmazonS3>(sp =>
 
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddCors();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -115,12 +113,6 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseSwagger();
-//    app.UseSwaggerUI();
-//}
 
 //if (app.Environment.IsDevelopment())
 //{

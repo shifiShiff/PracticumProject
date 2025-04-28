@@ -32,6 +32,11 @@ namespace Pictures.Data.Reposetories
 
         }
 
+        public async Task<Image> GetImageByIdAsync(int imageId)
+        {  
+            return await _context.Images.Where(img=>img.Id == imageId).FirstOrDefaultAsync();
+        }
+
         public async Task<List<Image>> GetImagesByChallengeAsync(int ChallengeId)
         {
             var topVotedImage = await _context.Images

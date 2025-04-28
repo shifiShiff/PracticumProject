@@ -13,6 +13,8 @@ namespace Pictures.Core.Service
         public Task<List<Image>> GetAllImagesAsync();
         public Task<Image> GetTopImageAsync(int ChallengeId);
         public Task<List<Image>> GetImagesByChallengeAsync(int ChallengeId);
+        public Task<Image> GetImageByIdAsync(int imageId);
+
         public Task<bool> AddImageAsync(Image image);
         public Task<bool> UpdateImageAsync(int id, ImagePost image);
         public Task<bool> DeleteImageAsync(int id);

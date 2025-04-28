@@ -63,5 +63,12 @@ namespace Pictures.Services
         {
             return await _imageReposetory.UpdateImageVoteAsync(id);
         }
+
+        public async Task<Image> GetImageByIdAsync(int imageId)
+        {
+            return await _imageReposetory.GetImageByIdAsync(imageId);
+        }
+
+       
     }
 }

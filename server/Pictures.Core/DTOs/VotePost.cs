@@ -8,8 +8,8 @@ namespace Pictures.Core.DTOs
 {
     public class VotePost
     {
-        public int UserId { get; set; } // מזהה המשתמש שהצביע
+        public int UserId { get; set; } 
         public int ChallengeId { get; set; }
-        public int ImageId { get; set; } // מזהה התמונה אליה ההצבעה שייכת
+        public int ImageId { get; set; } 
     }
 }
