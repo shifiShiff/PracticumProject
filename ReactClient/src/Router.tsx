@@ -26,7 +26,6 @@ export const myRouter = createBrowserRouter([
             },
             {
                 path: 'uploadfile', 
-                // element: <UploadFile />
                 element: (
                     <ProtectedRoute>
                       <UploadFile />
