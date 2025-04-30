@@ -22,6 +22,11 @@ export class AppComponent
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       console.log('isLoggedIn:', this.isLoggedIn);
+      if(isLoggedIn == false)
+      {
+        localStorage.removeItem('token');
+       
+      }
     });
   }
 

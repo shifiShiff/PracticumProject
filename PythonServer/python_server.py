@@ -6,11 +6,11 @@ import os
 
 
 app = Flask(__name__)
-CORS(app)  # זה פותח את הגישה מכל מקור
+CORS(app)  
 
 
 def analyze_image_with_challenge(image_url: str, challenge_description: str) -> str:
-    # הורדת תמונה והפיכה ל-base64
+
     image_data = requests.get(image_url).content
     image_base64 = base64.b64encode(image_data).decode("utf-8")
 
@@ -22,7 +22,6 @@ def analyze_image_with_challenge(image_url: str, challenge_description: str) -> 
         "Content-Type": "application/json"
     }
 
-    # יצירת ה-body עם התמונה + תיאור האתגר
     body = {
         "contents": [
             {
@@ -43,23 +42,17 @@ def analyze_image_with_challenge(image_url: str, challenge_description: str) -> 
         ]
     }
 
-    # שליחה וקבלת התשובה
     response = requests.post(url, headers=headers, json=body)
 
     if response.status_code == 200:
         text = response.json()["candidates"][0]["content"]["parts"][0]["text"]
-        
-        # הוספת אימוג'ים לפי התשובה
-        # if "לא עומדת" in text or "לא טובה" in text or "נכשלת" in text:
-        #     text += " 😕❌"
-        # else:
-        #     text += " 🎉😊"
-        
+
         return text 
     else:
         return f"שגיאה: {response.status_code} - {response.text}"
 
-# Endpoint לקבלת תמונה ותיאור
+
+
 @app.route('/analyze', methods=['POST'])
 def analyze():
     data = request.get_json()

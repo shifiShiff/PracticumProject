@@ -82,7 +82,7 @@ const Dashboard = observer(() => {
               letterSpacing: '1px'
             }}
           >
-            Loading Amazing Images...
+            Loading Images...
           </Typography>
           <style>{`
             @keyframes spin {
@@ -354,6 +354,8 @@ const Dashboard = observer(() => {
         </Box>
       </Box>
     </Box>
+
+    
   );
 });
 

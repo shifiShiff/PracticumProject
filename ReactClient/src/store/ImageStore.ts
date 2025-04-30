@@ -22,8 +22,6 @@ class ImageStore {
    
     try {
       const response = await apiClient.get("/Image"); 
-      // const response = await apiClient.get("/http://localhost:5131/api/Image"); 
-      console.log("load images"+response.data);
       this.imageList = response.data;
 
     } catch (error) {
@@ -31,10 +29,7 @@ class ImageStore {
     }
   }
   async getImageByChallengeId(challengeId: number) {
-
-    // return (await axios.get(`http://localhost:5131/api/Image/${challengeId}`)).data;
     return (await apiClient.get(`Image/${challengeId}`)).data;
-    // return (await apiClient.get(`http://localhost:5131/api/Image/${challengeId}`)).data;
   }
 
   async vote(challengeId:number|null, imageId: number,userId:string|null) {

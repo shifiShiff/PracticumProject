@@ -9,11 +9,13 @@ const Footer = () => {
         sx={{
         
           position: 'fixed',
+          // position: 'relative',
           bottom: 0,
             left: 0,
+          // width: '100%',
           width: '20%',
-        backgroundColor: 'rgb(255, 0, 98)',
-          color: 'white',
+        backgroundColor: 'rgb(255, 255, 255)',
+          color: 'black',
           textAlign: 'center',
           borderRadius: '0 15px 0 0 ',
           padding: 0,
@@ -25,9 +27,9 @@ const Footer = () => {
           href="https://github.com/shifiShiff"
           target="_blank"
           sx={{
-            color: '#fff',
+            color: 'rgb(3, 3, 3)',
             '&:hover': {
-              color: 'rgb(255, 255, 255)',
+              color: 'rgb(3, 3, 3)',
               transform: 'scale(1.2)',
               transition: '0.3s'
             }
@@ -43,4 +45,5 @@ const Footer = () => {
   };
   
 export default Footer;
+
 

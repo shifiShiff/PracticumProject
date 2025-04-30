@@ -26,7 +26,11 @@ const NavBar = () => {
     <AppBar position="fixed" sx={{ background: 'linear-gradient(45deg,rgb(6, 6, 6) 30%,rgb(66, 71, 70) 90%)', padding: '5px 0'}}>
       <Toolbar>
 
-        <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/dashboard" sx={{ marginRight: 2, color: 'rgb(253, 7, 151)' }}>
+        <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/dashboard" sx={{ marginRight: 2, color: 'rgb(253, 7, 151)' ,transition: 'all 0.2s ease',
+            '&:hover': {
+              color: 'rgb(255, 255, 255)',
+              transform: 'scale(1.1)'
+            }}}>
           <HomeIcon sx={{ fontSize: 50 ,'&:hover': {
               
               color: 'rgb(255, 255, 255)'
@@ -49,7 +53,10 @@ const NavBar = () => {
             color: 'rgb(255, 255, 255)',
             '&:hover': {
               backgroundColor: 'rgb(236, 127, 203)',
-              color: 'rgb(0, 0, 0)'
+              color: 'rgb(0, 0, 0)',
+              transition: 'all 0.2s ease',
+              transform: 'translateY(-2px)'
+            
             },
           }}
         >
@@ -69,7 +76,9 @@ const NavBar = () => {
             color: '#fff',
             '&:hover': {
               backgroundColor: 'rgb(236, 127, 203)',
-              color: 'rgb(0, 0, 0)'
+              color: 'rgb(0, 0, 0)',
+             transition: 'all 0.2s ease',
+            transform: 'translateY(-2px)'
             },
           }}
         >
@@ -86,7 +95,9 @@ const NavBar = () => {
             color: '#fff',
             '&:hover': {
               backgroundColor: 'rgb(236, 127, 203)',
-              color: 'rgb(0, 0, 0)'
+              color: 'rgb(0, 0, 0)',
+              transition: 'all 0.2s ease',
+              transform: 'translateY(-2px)'
 
             },
           }}
@@ -102,6 +113,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-
-
-

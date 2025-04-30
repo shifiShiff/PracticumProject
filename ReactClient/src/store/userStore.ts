@@ -11,19 +11,16 @@ class UserStore {
     login(user: User) {
         this.user = user;
         this.isLoggedIn = true;
-        // Additional logic for login
     }
 
     register(user: User) {
         this.user = user;
         this.isLoggedIn = true;
-        // Additional logic for registration
     }
 
     logout() {
         this.user = null;
         this.isLoggedIn = false;
-        // Additional logic for logout
     }
 
     getUser() {

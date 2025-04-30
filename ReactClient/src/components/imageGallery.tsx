@@ -1,6 +1,3 @@
-
-
-
 import { CardContent, CardMedia } from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
 import { observer } from "mobx-react-lite";
@@ -62,7 +59,6 @@ const ImageGallery = observer(() => {
       const uniqueChallengeIds = Array.from(new Set(images.map(image => image.challengeId)));
       await Promise.all(uniqueChallengeIds.map(challengeId => fetchChallengeDetails(challengeId)));
       
-      // Set the first challenge as active by default
       if (uniqueChallengeIds.length > 0 && activeChallenge === null) {
         const pastChallenges = uniqueChallengeIds.filter(id => id !== currentChallengeId);
         if (pastChallenges.length > 0) {
@@ -112,7 +108,7 @@ const ImageGallery = observer(() => {
     setExpandedChallenge(challengeId);
   };
 
-  // Get past challenges
+
   const pastChallenges = Object.keys(groupedImages)
     .map(Number)
     .filter(id => id !== currentChallengeId);
@@ -121,17 +117,16 @@ const ImageGallery = observer(() => {
     <Box sx={{ 
       padding: '2rem',
       minHeight: '100vh',
-      paddingTop: '120px',
+      paddingTop: '150px',
       width: 'calc(80vw - 150px)',
     }}>
     
-      {/* Challenge Timeline */}
       <Box sx={{ position: 'relative', mb: 4 }}>
         <IconButton 
           onClick={() => scrollCarousel('left')} 
           sx={{ 
             position: 'absolute', 
-            left: 0, 
+            left: '15px', 
             top: '50%', 
             transform: 'translateY(-50%)', 
             zIndex: 2,
@@ -189,7 +184,7 @@ const ImageGallery = observer(() => {
           onClick={() => scrollCarousel('right')} 
           sx={{ 
             position: 'absolute', 
-            right: 0, 
+            right:'15px', 
             top: '50%', 
             transform: 'translateY(-50%)', 
             zIndex: 2,
@@ -201,7 +196,6 @@ const ImageGallery = observer(() => {
         </IconButton>
       </Box>
 
-      {/* Active Challenge Content */}
       {activeChallenge !== null && challenges[activeChallenge] && (
         <Box sx={{
           backgroundColor: 'white',
@@ -211,11 +205,11 @@ const ImageGallery = observer(() => {
           maxWidth: '1200px',
           margin: '0 auto',
           transition: 'all 0.3s ease',
-          mt: 4
+          marginTop:'50px'
         }}>
           <Box sx={{
             padding: '2rem',
-            background: 'linear-gradient(to right, #FC466B,rgb(205, 162, 195))',
+            background: 'linear-gradient(to right,rgb(251, 0, 109),rgb(244, 110, 146))',
             color: 'white',
             display: 'flex',
             justifyContent: 'space-between',

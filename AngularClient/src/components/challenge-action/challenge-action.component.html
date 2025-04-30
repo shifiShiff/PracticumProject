@@ -1,4 +1,4 @@
-<div class="challenge-list-container">
+<!-- <div class="challenge-list-container">
     <h2 class="title">Challenge list</h2>
     @for(challenge of challenges; track challenge.id){
     <div class="challenge-card"></div>
@@ -46,4 +46,57 @@
 <button class="add-challenge-button" color="accent" (click)="openAddChallengeDialog()">
     Add Challenge
 </button>
-}
+} -->
+
+
+<div class="challenge-list-container">
+    <h2 class="section-title">Challenge List</h2>
+    
+    <div class="challenges-grid">
+      @for(challenge of challenges; track challenge.id){
+        <div class="challenge-card">
+          <div class="card-header">
+            <h3 class="challenge-title">{{ challenge.title }}</h3>
+            <p class="challenge-description">{{challenge.description}}</p>
+          </div>
+          
+          <div class="card-content">
+            <h4 class="winner-heading">Winner Details :</h4>
+            
+            @if(challenge.winnerDetails){
+              <div class="winner-details">
+                <p><span class="detail-label">Name:</span> {{ challenge.winnerDetails.name }}</p>
+                <p><span class="detail-label">Email:</span> {{ challenge.winnerDetails.email }}</p>
+              </div>
+              
+              @if (challenge.winnerImage) {
+                <a [href]="challenge.winnerImage.imageUrl" target="_blank" class="winner-link">
+                  <span class="winner-link-text">View Winning Image </span>
+                  <i class="material-icons">photo</i>
+                </a>
+              }
+            }
+            @else{
+              <div class="no-winner-state">
+                <div class="spinner-container">
+                  <mat-progress-spinner diameter="24" mode="indeterminate"></mat-progress-spinner>
+                </div>
+                <p class="no-winner-text">No Winner already</p>
+                <button mat-raised-button class="finish-challenge-button" (click)="closeChallenge(challenge.id)">
+                  <i class="material-icons">emoji_events</i>
+                  finish challenge
+                </button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  
+    @if (load==true) {
+      <button class="add-challenge-button" color="accent" (click)="openAddChallengeDialog()">
+        <i class="material-icons">add_circle</i>
+        Add Challenge
+      </button>
+    }
+  </div>
