@@ -63,7 +63,6 @@ const UploadFile = () => {
 
       setUploadSuccess(true);
       setImageUrl(response.data.imageUrl);
-      //עדכון רשימת התמונות
       await ImageStore.getAllImages();
       setFinished(true);
 
@@ -82,8 +81,8 @@ const UploadFile = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post(`http://127.0.0.1:5000/analyze`, {
-        // const response = await axios.post(`https://practicumproject-r2h7.onrender.com/analyze`, {
+      // const response = await axios.post(`http://127.0.0.1:5000/analyze`, {
+        const response = await axios.post(`https://practicumproject-r2h7.onrender.com/analyze`, {
         image_url: imageUrl,
         challenge_description: challengeDescription
       }, {
