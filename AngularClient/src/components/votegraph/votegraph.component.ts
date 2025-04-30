@@ -15,8 +15,6 @@ export class VotegraphComponent {
   constructor(private challengeService: ChallengeService) {}
 
 
-
-
   ngOnInit() {
     this.challengeService.getChallengesWithVotes().subscribe(data => {
       console.log('Data from service:', data);
