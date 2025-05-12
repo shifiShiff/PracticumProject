@@ -5,13 +5,14 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import apiClient from './interceptor';
 import { observer } from 'mobx-react-lite';
 import { jwtDecode } from 'jwt-decode';
+import { isTokenValid } from './protectedRoute';
 
 const Dashboard = observer(() => {
   const [images, setImages] = useState<ImageType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [challenge, setChallenge] = useState<{ id: number, title: string; description: string } | null>(null);
-  const isLoggedIn = !!localStorage.getItem('token'); 
+  // const isLoggedIn = !!localStorage.getItem('token'); 
 
   useEffect(() => {
     const fetchCurrentChallengeImages = async () => {
@@ -324,7 +325,7 @@ const Dashboard = observer(() => {
                     Votes: {image.votes}
                   </Typography>
                   
-                  {isLoggedIn && (
+                  {isTokenValid(localStorage.getItem("token") || "") &&(
                     <IconButton
                       color="primary"
                       onClick={() => ImageStore.vote(challenge?.id ?? null, image.id, getUserId())}

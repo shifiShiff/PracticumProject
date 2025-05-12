@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-const isTokenValid = (token: string): boolean => {
+export const isTokenValid = (token: string): boolean => {
   try {
     const decoded: any = jwtDecode(token);
     return decoded.exp * 1000 > Date.now();

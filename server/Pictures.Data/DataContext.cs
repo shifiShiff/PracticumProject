@@ -18,12 +18,12 @@ namespace Pictures.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=PhotoTop_project");
-            var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-            if (!string.IsNullOrEmpty(connectionString))
-            {
-                optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            }
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=PhotoTop_project");
+            //var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            //if (!string.IsNullOrEmpty(connectionString))
+            //{
+            //    optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            //}
         }
     }
 }
