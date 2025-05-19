@@ -34,7 +34,11 @@ namespace Pictures.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Challenge>> GetChallengeById(int id)
         {
-            return await _challengeService.GetChallengeById(id);
+            //return await _challengeService.GetChallengeById(id);
+            var challenge = await _challengeService.GetChallengeById(id);
+            if (challenge == null)
+                return NotFound();
+            return Ok(challenge);
         }
 
 
