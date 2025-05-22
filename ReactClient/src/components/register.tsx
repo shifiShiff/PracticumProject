@@ -16,7 +16,7 @@ const Register: React.FC = () => {
 
     try {
       const response = await apiClient.post("/User/register", {
-        UserId: data.id,
+        UserId: data.tz,
         Name: data.name,
         Email: data.email,
         PasswordHash: data.password
