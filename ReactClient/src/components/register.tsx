@@ -54,14 +54,14 @@ const Register: React.FC = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
           <Controller
-            name="id"
+            name="tz"
             control={control}
             defaultValue=""
             rules={{ required: "ID is required" }}
             render={({ field }) => (
               <TextField
                 {...field}
-                label="ID"
+                label="TZ"
                 variant="outlined"
                 fullWidth
                 margin="normal"
