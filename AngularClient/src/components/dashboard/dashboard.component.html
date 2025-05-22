@@ -1,4 +1,4 @@
-
+<!-- 
   <div class="menu-container">
 
     <img src="assets/logo.png" alt="Logo" style="height: 100px;">
@@ -15,4 +15,42 @@
   <div class="content-container">
     <router-outlet></router-outlet>
   </div>
+ -->
 
+
+
+
+
+ <div class="menu-container">
+  <div class="menu-content">
+    <!-- Logo Section -->
+    <div class="logo-section">
+      <img src="assets/logo.png" alt="Logo" class="logo">
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <button 
+        mat-raised-button 
+        class="nav-btn reports-btn" 
+        (click)="navigateTo('reports')"
+      >
+        <mat-icon>assessment</mat-icon>
+        Reports
+      </button>
+      
+      <button 
+        mat-raised-button 
+        class="nav-btn challenges-btn" 
+        (click)="navigateTo('challenges')"
+      >
+        <mat-icon>list</mat-icon>
+        Challenge List
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="content-container">
+  <router-outlet></router-outlet>
+</div>

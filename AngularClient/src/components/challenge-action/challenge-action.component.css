@@ -1,98 +1,11 @@
-/* 
-  .challenge-list-container {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 15px; 
-    justify-content: center; 
-    padding: 20px;
-    background-color: #ffffff;
-    margin: auto;
-    margin-top: 120px;
-      width: 60%;
-  }
-  
-  
-  mat-card {
-    width: 100%; 
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-
-  }
-  
-  mat-card-header {
-    background-color: rgb(0, 0, 0);
-    border-bottom: 1px solid rgb(255, 252, 252);
-    border-radius: 8px 8px 0 0;
-  }
-  
-  mat-card-title {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  mat-card-subtitle {
-    font-size: 14px;
-    color: #ffffff;
-  }
-  
-  mat-card-content {
-    flex-grow: 1; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(255, 0, 98);
-    color: black;
-
-  }
-  
-  mat-card-actions {
-    margin-top: auto; 
-    display: flex;
-    justify-content: flex-end;
-    padding: 16px;
-  }
-  
-  button {
-    font-size: 14px;
-  }
-
-
-  .add-challenge-button {
-    font-size: 18px; 
-    padding: 15px 30px; 
-    background-color:  rgb(255, 0, 98); 
-    color: rgb(0, 0, 0); 
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  }
-  
-   .add-challenge-button:hover {
-    background-color: #fe025a; 
-    color: white;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
-   }
-  
-   .winner-link {
-    color: #fcf8fb; 
-    text-decoration: underline;
-    font-weight: bold;
-    margin-top: 8px;
-    display: inline-block;
-  }
-   */
-
 
 
    /* Challenge List Styles */
 .challenge-list-container {
-  max-width: 1200px;
+  /* ????? */
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 5px;
   direction: rtl;
   font-family: 'Rubik', sans-serif;
 }
