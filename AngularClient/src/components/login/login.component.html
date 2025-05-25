@@ -1,7 +1,4 @@
 
-
-
-
    <div class="login-container">
     <mat-card class="login-card">
       <mat-card-title class="login-title">Login</mat-card-title>
@@ -11,17 +8,21 @@
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Email</mat-label>
             <input matInput type="email" formControlName="email" required>
-            <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched){
+            <mat-error >
               Error: Not a valid Email
             </mat-error>
+          }
           </mat-form-field>
   
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Password</mat-label>
             <input matInput type="password" formControlName="password" required>
-            <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
+            <mat-error >
               Error: Password is required
             </mat-error>
+          }
           </mat-form-field>
   
           <button mat-raised-button color="primary" class="form-button" type="submit" [disabled]="loginForm.invalid">
