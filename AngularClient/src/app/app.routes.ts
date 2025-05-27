@@ -7,7 +7,7 @@ import { VotegraphComponent } from './components/votegraph/votegraph.component';
 import { ChallengeActionComponent } from './components/challenge-action/challenge-action.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' }, // ברירת מחדל
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { 
         path: 'dashboard', 
