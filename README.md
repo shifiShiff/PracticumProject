@@ -18,11 +18,12 @@ This platform consists of multiple coordinated apps:
   - Challenge creation & publishing  
   - Reviewing entries and winner selection  
   - Sending email notifications to winners  
-  - Managing users and challenges  
+  - Managing challenges  
 
 - **🧠 AI Service (Python)**  
-  - Generates image descriptions and challenge-related texts  
-  - Receives image + prompt and returns smart captions  
+  - Analyzes uploaded images and generates feedback  
+  - Provides smart reasoning and commentary based on image content and context  
+
 
 - **🧾 Backend API (.NET)**  
   - RESTful API for both clients  
@@ -49,14 +50,21 @@ This platform consists of multiple coordinated apps:
 | AI Service     | Python + FastAPI  |
 | Database       | MySQL             |
 | Auth           | JWT               |
-| Storage        | Cloud-based (e.g., Firebase, AWS S3) |
+| Storage        | Cloud-based (AWS S3) |
+
+> All services are deployed and live on Render cloud platform.
+
 
 ## 🚀 Getting Started
 
 Each component runs independently. Clone each repo and follow its `README`:
 
 ```bash
-# Example
-git clone https://github.com/your-username/challenge-backend.git
-cd challenge-backend
-dotnet run
+## 🌍 Live Demo
+
+You can explore the live apps here:
+
+- **🔵 User Website (React):** [https://practicumproject-reactclient.onrender.com/](https://practicumproject-reactclient.onrender.com/))  
+- **🟠 Admin Dashboard (Angular):** [https://practicumproject.onrender.com](https://practicumproject.onrender.com)
+- 
+
