@@ -64,5 +64,5 @@ Each component runs independently. Clone each repo and follow its `README`:
 
 You can try the live applications here:
 
-- **🔵 User Website (React):** [Open User App ›](https://practicumproject-reactclient.onrender.com)
-- **🟠 Admin Dashboard (Angular):** [Open Admin Dashboard ›](https://practicumproject.onrender.com)
+- **🔵 User Website (React):** https://practicumproject-reactclient.onrender.com  
+- **🟠 Admin Dashboard (Angular):** https://practicumproject.onrender.com
